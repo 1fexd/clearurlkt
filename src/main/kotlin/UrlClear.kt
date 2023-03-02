@@ -34,15 +34,20 @@ fun Map<String, String?>.makeQuery(): String {
     }.joinToString("&")
 }
 
+fun printlnDebug(str: String, debugPrint: Boolean){
+    if(debugPrint){
+        println(str)
+    }
+}
+
 fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>): String {
     var url = url
     providers.forEach { provider ->
         if (provider.urlPatternRegex.containsMatchIn(url)) {
-            println(provider.key)
+            printlnDebug(provider.key, debugPrint)
             var changes = false
 
             provider.exceptions.forEach {
-//                println("\tException $it")
                 if (it.containsMatchIn(url)) {
                     return url
                 }
@@ -70,7 +75,7 @@ fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>)
                 url = url.replace(rawRule, "")
 
                 if (preReplaceUrl != url) {
-                    println("Raw url: $preReplaceUrl $url")
+                    printlnDebug("Raw url: $preReplaceUrl $url", debugPrint)
                     changes = true
                 }
             }
@@ -79,14 +84,14 @@ fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>)
             val fields = uriObj.query?.querySplit() ?: mutableMapOf()
             val fragments = uriObj.fragment?.querySplit(fragment = true) ?: mutableMapOf()
 
-            println("\tFields: $fields (${uriObj.query}), Fragments: $fragments (${uriObj.fragment})")
+            printlnDebug("\tFields: $fields (${uriObj.query}), Fragments: $fragments (${uriObj.fragment})", debugPrint)
 
             provider.rules.forEach { rule ->
                 val removeFields = mutableListOf<String>()
                 fields.forEach { (field, _) ->
                     if (rule.containsMatchIn(field)) {
                         removeFields.add(field)
-                        println("\tRemoving field $field")
+                        printlnDebug("\tRemoving field $field", debugPrint)
                         changes = true
                     }
                 }
@@ -97,7 +102,7 @@ fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>)
                 fragments.forEach { (fragment, _) ->
                     if (rule.containsMatchIn(fragment)) {
                         fragments.remove(fragment)
-                        println("\tRemoving fragment $fragment")
+                        printlnDebug("\tRemoving fragment $fragment", debugPrint)
                         changes = true
                     }
                 }
@@ -120,13 +125,13 @@ fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>)
                 append(path)
             }
 
-            println("\tRebuilt url: $rebuiltUrl")
+            printlnDebug("\tRebuilt url: $rebuiltUrl", debugPrint)
 
             if (fields.isNotEmpty()) {
                 rebuiltUrl += "?" + fields.makeQuery()
             }
 
-            println("\tRebuilt url+fields: $rebuiltUrl")
+            printlnDebug("\tRebuilt url+fields: $rebuiltUrl", debugPrint)
 
             if ((uriObj.query != null && fields.isEmpty()) || (uriObj.query != fields.makeQuery())) {
                 changes = true
@@ -140,8 +145,8 @@ fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>)
                 changes = true
             }
 
-            println("\tRebuilt url+fragments: $rebuiltUrl")
-            println("\tProvider has changes: $changes")
+            printlnDebug("\tRebuilt url+fragments: $rebuiltUrl", debugPrint)
+            printlnDebug("\tProvider has changes: $changes", debugPrint)
             if (changes) {
                 return rebuiltUrl
             }
