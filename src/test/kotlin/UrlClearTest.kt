@@ -23,7 +23,8 @@ class UrlClearTest {
             "http://example.com/?p1=value" to "http://example.com/?p1=value&p1=othervalue",
             "http://example.com/" to "http://example.com/?&&&&",
             "https://docs.julialang.org/en/v1/stdlib/REPL/#Key-bindings" to "https://docs.julialang.org/en/v1/stdlib/REPL/#Key-bindings",
-            "https://www.instagram.com/runabyte" to "https://www.instagram.com/runabyte?igshid=XkEaRAZ3L3X%3D"
+            "https://www.instagram.com/runabyte" to "https://www.instagram.com/runabyte?igshid=XkEaRAZ3L3X%3D",
+            "https://twitter.com/DelusionPosting/status/1630991327381929987" to "https://twitter.com/DelusionPosting/status/1630991327381929987?t=AP1I12BA7jOlee95KLpgqX&s=19"
         ).forEach { (expected, input) ->
             println("Expected: $expected")
             assertEquals(expected, urlClear(input, debugPrint = true, providers))

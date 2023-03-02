@@ -127,21 +127,25 @@ fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>)
 
             printlnDebug("\tRebuilt url: $rebuiltUrl", debugPrint)
 
+            val fieldsQuery = fields.makeQuery()
             if (fields.isNotEmpty()) {
-                rebuiltUrl += "?" + fields.makeQuery()
+                rebuiltUrl += "?$fieldsQuery"
             }
 
             printlnDebug("\tRebuilt url+fields: $rebuiltUrl", debugPrint)
 
-            if ((uriObj.query != null && fields.isEmpty()) || (uriObj.query != fields.makeQuery())) {
+            if (uriObj.query != null && (fields.isEmpty() || uriObj.query != fieldsQuery)) {
+                printlnDebug("\tUriObj.query: ${uriObj.query} $fields $fieldsQuery", debugPrint)
                 changes = true
             }
 
+            val fragmentsQuery = fragments.makeQuery()
             if (fragments.isNotEmpty()) {
-                rebuiltUrl += "#" + fragments.makeQuery()
+                rebuiltUrl += "#$fragmentsQuery"
             }
 
-            if ((uriObj.fragment != null && fragments.isEmpty()) || (uriObj.fragment != fragments.makeQuery())) {
+            if (uriObj.fragment != null && (fragments.isEmpty() || uriObj.fragment != fragmentsQuery)) {
+                printlnDebug("\tUriObj.fragment: ${uriObj.fragment}, $fragments, ${fragmentsQuery};", debugPrint)
                 changes = true
             }
 
