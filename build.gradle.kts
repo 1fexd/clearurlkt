@@ -1,11 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.21"
+    kotlin("jvm") version "1.6.20"
+    java
+    maven
+    id("net.nemerosa.versioning") version "3.0.0"
 }
 
 group = "fe.clearurlkt"
-version = "1.0-SNAPSHOT"
+version = versioning.info.tag ?: versioning.info.full
 
 repositories {
     mavenCentral()
