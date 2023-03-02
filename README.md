@@ -1,3 +1,3 @@
 # clearurlkt
 
-(Unfinished) implementation of [ClearURLs](https://github.com/ClearURLs/)
+(Unfinished) Kotlin implementation of [ClearURLs](https://github.com/ClearURLs/)
