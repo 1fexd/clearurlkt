@@ -36,31 +36,31 @@ fun Map<String, String?>.makeQuery(): String {
     }.joinToString("&")
 }
 
-fun printlnDebug(str: String, debugPrint: Boolean){
-    if(debugPrint){
+fun printlnDebug(str: String, debugPrint: Boolean) {
+    if (debugPrint) {
         println(str)
     }
 }
 
-fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>): String {
-    var url = url
+fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false): String {
+    var editUrl = url
     providers.forEach { provider ->
-        if (provider.urlPatternRegex.containsMatchIn(url)) {
+        if (provider.urlPatternRegex.containsMatchIn(editUrl)) {
             printlnDebug(provider.key, debugPrint)
             var changes = false
 
             provider.exceptions.forEach {
-                if (it.containsMatchIn(url)) {
-                    return url
+                if (it.containsMatchIn(editUrl)) {
+                    return editUrl
                 }
             }
 
             provider.redirections.forEach {
-                val result = it.matchEntire(url)
+                val result = it.matchEntire(editUrl)
                 if (result != null) {
                     val (_, redirect) = result.groupValues
                     val resultUrl = URLDecoder.decode(redirect, StandardCharsets.UTF_8)
-                    val urlObj = URL(url)
+                    val urlObj = URL(editUrl)
 
                     if (!resultUrl.contains("://")) {
                         return buildString {
@@ -68,21 +68,21 @@ fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>)
                         }
                     }
 
-                    return urlClear(resultUrl.toString(), debugPrint, providers)
+                    return clearUrl(resultUrl.toString(), providers, debugPrint)
                 }
             }
 
             provider.rawRules.forEach { rawRule ->
-                val preReplaceUrl = url
-                url = url.replace(rawRule, "")
+                val preReplaceUrl = editUrl
+                editUrl = editUrl.replace(rawRule, "")
 
-                if (preReplaceUrl != url) {
-                    printlnDebug("Raw url: $preReplaceUrl $url", debugPrint)
+                if (preReplaceUrl != editUrl) {
+                    printlnDebug("Raw url: $preReplaceUrl $editUrl", debugPrint)
                     changes = true
                 }
             }
 
-            val uriObj = URI(url)
+            val uriObj = URI(editUrl)
             val fields = uriObj.query?.querySplit() ?: mutableMapOf()
             val fragments = uriObj.fragment?.querySplit(fragment = true) ?: mutableMapOf()
 
@@ -159,5 +159,5 @@ fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>)
         }
     }
 
-    return url
+    return editUrl
 }

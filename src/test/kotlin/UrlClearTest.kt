@@ -1,6 +1,6 @@
+import fe.clearurlskt.clearUrl
 import fe.clearurlskt.loadClearUrlsJson
 import fe.clearurlskt.loadClearUrlsProviders
-import fe.clearurlskt.urlClear
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -30,7 +30,7 @@ class UrlClearTest {
             "https://twitter.com/DelusionPosting/status/1630991327381929987" to "https://twitter.com/DelusionPosting/status/1630991327381929987?t=AP1I12BA7jOlee95KLpgqX&s=19"
         ).forEach { (expected, input) ->
             println("Expected: $expected")
-            assertEquals(expected, urlClear(input, debugPrint = true, providers))
+            assertEquals(expected, clearUrl(input, providers, true))
         }
 
     }
