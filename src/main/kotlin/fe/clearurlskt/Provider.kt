@@ -1,3 +1,5 @@
+package fe.clearurlskt
+
 import com.google.gson.JsonObject
 import fe.gson.extensions.array
 import fe.gson.extensions.bool
@@ -15,10 +17,10 @@ class Provider(val key: String, val urlPattern: String, val completeProvider: Bo
     val urlPatternRegex by lazy { Regex(urlPattern) }
 }
 
-fun loadProviders(inputStream: InputStream) = loadProviders(loadJson(inputStream))
+fun loadClearUrlsProviders(inputStream: InputStream) = loadClearUrlsProviders(loadClearUrlsJson(inputStream))
 
-fun loadProviders(text: String) = loadProviders(loadJson(text))
-fun loadProviders(json: JsonObject): List<Provider> {
+fun loadClearUrlsProviders(text: String) = loadClearUrlsProviders(loadClearUrlsJson(text))
+fun loadClearUrlsProviders(json: JsonObject): List<Provider> {
     return json.entrySet().map { (key, element) ->
         val obj = element as JsonObject
         val provider = Provider(key, obj.string("urlPattern") ?: "", obj.bool("completeProvider") ?: false)

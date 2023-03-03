@@ -1,12 +1,15 @@
+import fe.clearurlskt.loadClearUrlsJson
+import fe.clearurlskt.loadClearUrlsProviders
+import fe.clearurlskt.urlClear
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class UrlClearTest {
     @Test
     fun testUrlClear() {
-        val inputStream = getBuiltInJson()!!
-        val json = loadJson(inputStream)
-        val providers = loadProviders(json)
+        val inputStream = getBuiltInClearUrlsJson()!!
+        val json = loadClearUrlsJson(inputStream)
+        val providers = loadClearUrlsProviders(json)
 
 
         mapOf(

@@ -1,3 +1,5 @@
+package fe.clearurlskt
+
 import java.net.URI
 import java.net.URL
 import java.net.URLDecoder
@@ -150,7 +152,7 @@ fun urlClear(url: String, debugPrint: Boolean = true, providers: List<Provider>)
             }
 
             printlnDebug("\tRebuilt url+fragments: $rebuiltUrl", debugPrint)
-            printlnDebug("\tProvider has changes: $changes", debugPrint)
+            printlnDebug("\tfe.clearurlskt.Provider has changes: $changes", debugPrint)
             if (changes) {
                 return rebuiltUrl
             }
