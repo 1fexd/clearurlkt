@@ -1,0 +1,6 @@
+import java.io.InputStream
+
+object ClearURLResource {
+    fun getBuiltInClearUrlsJson(name: String = "clearurls.json"): InputStream? =
+        ClearURLResource::class.java.getResourceAsStream(name)
+}

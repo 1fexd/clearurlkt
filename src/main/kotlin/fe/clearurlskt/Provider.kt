@@ -17,9 +17,6 @@ class Provider(val key: String, val urlPattern: String, val completeProvider: Bo
     val urlPatternRegex by lazy { Regex(urlPattern) }
 }
 
-fun loadClearUrlsProviders(inputStream: InputStream) = loadClearUrlsProviders(loadClearUrlsJson(inputStream))
-
-fun loadClearUrlsProviders(text: String) = loadClearUrlsProviders(loadClearUrlsJson(text))
 fun loadClearUrlsProviders(json: JsonObject): List<Provider> {
     return json.entrySet().map { (key, element) ->
         val obj = element as JsonObject
