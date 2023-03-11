@@ -1,8 +1,10 @@
 package fe.clearurlskt
 
 import java.net.URI
+import java.net.URISyntaxException
 import java.net.URL
 import java.net.URLDecoder
+import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 fun String.querySplit(fragment: Boolean = false): MutableMap<String, out String?> {
@@ -82,7 +84,18 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
                 }
             }
 
-            val uriObj = URI(editUrl)
+            val uriObj = try {
+                URI(editUrl)
+            } catch (e: URISyntaxException) {
+                val fragmentHashIndex = editUrl.indexOf("#")
+                val newUrl = editUrl.substring(
+                    0,
+                    fragmentHashIndex
+                ) + "#" + URLEncoder.encode(editUrl.substring(fragmentHashIndex + 1), StandardCharsets.UTF_8)
+
+                printlnDebug("\tNew url: $newUrl", debugPrint)
+                URI(newUrl)
+            }
             val fields = uriObj.query?.querySplit() ?: mutableMapOf()
             val fragments = uriObj.fragment?.querySplit(fragment = true) ?: mutableMapOf()
 
