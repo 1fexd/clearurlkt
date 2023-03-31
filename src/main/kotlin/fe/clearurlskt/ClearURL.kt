@@ -87,15 +87,22 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
             val uriObj = try {
                 URI(editUrl)
             } catch (e: URISyntaxException) {
-                val fragmentHashIndex = editUrl.indexOf("#")
-                val newUrl = editUrl.substring(
-                    0,
-                    fragmentHashIndex
-                ) + "#" + URLEncoder.encode(editUrl.substring(fragmentHashIndex + 1), StandardCharsets.UTF_8)
+                printlnDebug(e.message!!, debugPrint)
 
-                printlnDebug("\tNew url: $newUrl", debugPrint)
-                URI(newUrl)
+                if(editUrl.count { it == '#' } > 1){
+                    val fragmentHashIndex = editUrl.indexOf("#")
+                    val newUrl = editUrl.substring(
+                        0,
+                        fragmentHashIndex
+                    ) + "#" + URLEncoder.encode(editUrl.substring(fragmentHashIndex + 1), StandardCharsets.UTF_8)
+
+                    printlnDebug("\tNew url: $newUrl", debugPrint)
+                    URI(newUrl)
+                } else {
+                    return url
+                }
             }
+
             val fields = uriObj.query?.querySplit() ?: mutableMapOf()
             val fragments = uriObj.fragment?.querySplit(fragment = true) ?: mutableMapOf()
 

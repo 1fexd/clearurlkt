@@ -27,7 +27,8 @@ class UrlClearTest {
             "https://twitter.com/DelusionPosting/status/1630991327381929987" to "https://twitter.com/DelusionPosting/status/1630991327381929987?t=AP1I12BA7jOlee95KLpgqX&s=19",
             "https://example.com/##" to "https://example.com/##",
             "https://example.com/" to "https://example.com/??",
-            "https://example.com/#xxxxxxxxxx#" to "https://example.com/#xxxxxxxxxx#"
+            "https://example.com/#xxxxxxxxxx#" to "https://example.com/#xxxxxxxxxx#",
+            "https://social.tchncs.de/oauth/authorize?client_id=CLIENT_LEL&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&scope=read" to "https://social.tchncs.de/oauth/authorize?client_id=CLIENT_LEL&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&scope=read"
         ).forEach { (expected, input) ->
             println("Expected: $expected")
             assertEquals(expected, clearUrl(input, providers, true))
