@@ -45,7 +45,7 @@ fun printlnDebug(str: String, debugPrint: Boolean) {
 }
 
 fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false): String {
-    var editUrl = url
+    var editUrl = url.trim()
     providers.forEach { provider ->
         if (provider.urlPatternRegex.containsMatchIn(editUrl)) {
             printlnDebug(provider.key, debugPrint)
