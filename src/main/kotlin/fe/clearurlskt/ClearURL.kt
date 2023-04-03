@@ -88,8 +88,8 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
                 URI(editUrl)
             } catch (e: URISyntaxException) {
                 printlnDebug(e.message!!, debugPrint)
-
-                if(editUrl.count { it == '#' } > 1){
+                if(e.index > -1 && e.input[e.index] == '#' && e.reason == "Illegal character in fragment"){
+                    // duplicate hash sign detected
                     val fragmentHashIndex = editUrl.indexOf("#")
                     val newUrl = editUrl.substring(
                         0,
