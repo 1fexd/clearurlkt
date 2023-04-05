@@ -58,7 +58,8 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
             }
 
             provider.redirections.forEach {
-                val result = it.matchEntire(editUrl)
+                val result = it.find(editUrl)
+                printlnDebug("Redirection: $it $result", debugPrint)
                 if (result != null) {
                     val (_, redirect) = result.groupValues
                     val resultUrl = URLDecoder.decode(redirect, StandardCharsets.UTF_8)
