@@ -3,4 +3,4 @@
 (Unfinished) Kotlin implementation of [ClearURLs](https://github.com/ClearURLs/)
 
 Last updated
-at `4035d47c4dafab151c5429dd2b0e0ad8db085af7` ([Diff](https://github.com/ClearURLs/rules/compare/4035d47c4dafab151c5429dd2b0e0ad8db085af7...master))
+at `fddc7e69cab559c71b68d793c814b016e7247344` ([Diff](https://github.com/ClearURLs/rules/compare/fddc7e69cab559c71b68d793c814b016e7247344...master))
