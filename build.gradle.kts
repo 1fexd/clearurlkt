@@ -21,6 +21,10 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
+tasks.withType<Jar> {
+    exclude("fetch_latest_clearurls.sh")
+}
+
 tasks.test {
     useJUnitPlatform()
 }
