@@ -306,7 +306,8 @@
                 "^https?:\\/\\/button.like.co\\/in\\/.*?&?referrer=[^/?&]*",
                 "^https?:\\/\\/www\\.mma\\.go\\.kr",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?github\\.com",
-                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?billiger\\.de\\/.*?mc="
+                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?billiger\\.de\\/.*?mc=",
+                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?\\.youtrack\\.cloud"
             ],
             "redirections": [],
             "forceRedirection": false
@@ -2799,6 +2800,18 @@
             "rawRules": [],
             "exceptions": [],
             "redirections": [],
+            "forceRedirection": false
+        },
+        "partner-ads.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?partner-ads\\.com",
+            "completeProvider": false,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [
+                "^https?:\\/\\/.*?partner-ads\\.com\\/.*?htmlurl=([^&]+)"
+            ],
             "forceRedirection": false
         }
     }
