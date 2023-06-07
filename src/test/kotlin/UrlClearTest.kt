@@ -8,7 +8,6 @@ class UrlClearTest {
     fun testUrlClear() {
         val providers = ClearURLLoader.loadBuiltInClearURLProviders()
 
-
         mapOf(
             "https://deezer.com/track/891177062" to "https://deezer.com/track/891177062?utm_source=deezer",
             "https://pypi.org/project/Unalix" to "https://www.google.com/url?q=https://pypi.org/project/Unalix",
@@ -29,11 +28,11 @@ class UrlClearTest {
             "https://example.com/" to "https://example.com/??",
             "https://example.com/#xxxxxxxxxx#" to "https://example.com/#xxxxxxxxxx#",
             "https://social.tchncs.de/oauth/authorize?client_id=CLIENT_LEL&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&scope=read" to "https://social.tchncs.de/oauth/authorize?client_id=CLIENT_LEL&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&scope=read",
-            "https://minecrafthelp.zendesk.com/requests/9999999999999999999/satisfaction/new/asfdasfasfasfasdasdasdasdasd?locale=1&intention=16" to "https://www.google.com/url?q=https://minecrafthelp.zendesk.com/requests/9999999999999999999/satisfaction/new/asfdasfasfasfasdasdasdasdasd?locale%3D1%26intention%3D16&source=gmail&ust=999999999999999999999&usg=asdafsasfasfasfasfaf"
+            "https://minecrafthelp.zendesk.com/requests/9999999999999999999/satisfaction/new/asfdasfasfasfasdasdasdasdasd?locale=1&intention=16" to "https://www.google.com/url?q=https://minecrafthelp.zendesk.com/requests/9999999999999999999/satisfaction/new/asfdasfasfasfasdasdasdasdasd?locale%3D1%26intention%3D16&source=gmail&ust=999999999999999999999&usg=asdafsasfasfasfasfaf",
+            "https://open.spotify.com/playlist/fuck_you_spotify?pt=trash_app" to "https://open.spotify.com/playlist/fuck_you_spotify?si=lol&pt=trash_app",
         ).forEach { (expected, input) ->
             println("Expected: $expected")
             assertEquals(expected, clearUrl(input, providers, true))
         }
-
     }
 }
