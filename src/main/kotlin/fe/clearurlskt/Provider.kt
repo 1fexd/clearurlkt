@@ -18,7 +18,8 @@ class Provider(val key: String, val urlPattern: String, val completeProvider: Bo
 }
 
 fun loadClearUrlsProviders(json: JsonObject): List<Provider> {
-    return json.entrySet().map { (key, element) ->
+    var globalRulesProvider: Provider? = null
+    val providers = json.entrySet().mapNotNull { (key, element) ->
         val obj = element as JsonObject
         val provider = Provider(key, obj.string("urlPattern") ?: "", obj.bool("completeProvider") ?: false)
 
@@ -43,6 +44,16 @@ fun loadClearUrlsProviders(json: JsonObject): List<Provider> {
             provider.redirections.add(Regex(it.asJsonPrimitive.asString))
         }
 
-        return@map provider
+        if (key == "globalRules") {
+            globalRulesProvider = provider
+            null
+        } else provider
+    }.toMutableList()
+
+    // make sure the globalRules provider is the last one in the list and used as a fallback
+    if (globalRulesProvider != null) {
+        providers.add(globalRulesProvider!!)
     }
+
+    return providers
 }
