@@ -4,7 +4,6 @@ import com.google.gson.JsonObject
 import fe.gson.extensions.array
 import fe.gson.extensions.bool
 import fe.gson.extensions.string
-import java.io.InputStream
 
 class Provider(val key: String, val urlPattern: String, val completeProvider: Boolean = true) {
     val rules = mutableListOf<Regex>()
