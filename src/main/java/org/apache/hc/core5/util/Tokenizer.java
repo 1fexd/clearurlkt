@@ -96,14 +96,6 @@ public class Tokenizer {
 
     }
 
-    public static BitSet INIT_BITSET(final int ... b) {
-        final BitSet bitset = new BitSet();
-        for (final int aB : b) {
-            bitset.set(aB);
-        }
-        return bitset;
-    }
-
     /** Double quote */
     public static final char DQUOTE = '\"';
 

@@ -105,36 +105,6 @@ public final class HttpHost implements NamedEndpoint, Serializable {
     }
 
     /**
-     * Creates {@code HttpHost} instance with the default scheme and the given hostname and port.
-     *
-     * @param hostname  the hostname (IP or DNS name)
-     * @param port      the port number.
-     *                  {@code -1} indicates the scheme default port.
-     *
-     * @throws IllegalArgumentException
-     *             If the port parameter is outside the specified range of valid port values, which is between 0 and
-     *             65535, inclusive. {@code -1} indicates the scheme default port.
-     */
-    public HttpHost(final String hostname, final int port) {
-        this(null, hostname, port);
-    }
-
-    /**
-     * Creates {@code HttpHost} instance with the given hostname and scheme and the default port for that scheme.
-     * @param scheme    the name of the scheme.
-     *                  {@code null} indicates the
-     *                  {@link #DEFAULT_SCHEME default scheme}
-     * @param hostname  the hostname (IP or DNS name)
-     *
-     * @throws IllegalArgumentException
-     *             If the port parameter is outside the specified range of valid port values, which is between 0 and
-     *             65535, inclusive. {@code -1} indicates the scheme default port.
-     */
-    public HttpHost(final String scheme, final String hostname) {
-        this(scheme, hostname, -1);
-    }
-
-    /**
      * Creates {@code HttpHost} instance from a string. Text may not contain any blanks.
      *
      * @since 4.4
@@ -166,72 +136,6 @@ public final class HttpHost implements NamedEndpoint, Serializable {
     public static HttpHost create(final URI uri) {
         final String scheme = uri.getScheme();
         return new HttpHost(scheme != null ? scheme : URIScheme.HTTP.getId(), uri.getHost(), uri.getPort());
-    }
-
-    /**
-     * Creates {@code HttpHost} instance with the default scheme and port and the given hostname.
-     *
-     * @param hostname  the hostname (IP or DNS name)
-     *
-     * @throws IllegalArgumentException
-     *             If the port parameter is outside the specified range of valid port values, which is between 0 and
-     *             65535, inclusive. {@code -1} indicates the scheme default port.
-     */
-    public HttpHost(final String hostname) {
-        this(null, hostname, -1);
-    }
-
-    /**
-     * Creates {@code HttpHost} instance with the given scheme, inet address and port.
-     * @param scheme    the name of the scheme.
-     *                  {@code null} indicates the
-     *                  {@link #DEFAULT_SCHEME default scheme}
-     * @param address   the inet address.
-     * @param port      the port number.
-     *                  {@code -1} indicates the scheme default port.
-     *
-     * @throws IllegalArgumentException
-     *             If the port parameter is outside the specified range of valid port values, which is between 0 and
-     *             65535, inclusive. {@code -1} indicates the scheme default port.
-     *
-     * @since 5.0
-     */
-    public HttpHost(final String scheme, final InetAddress address, final int port) {
-        this(scheme, Args.notNull(address,"Inet address"), address.getHostName(), port);
-    }
-
-    /**
-     * Creates {@code HttpHost} instance with the default scheme and the given inet address
-     * and port.
-     *
-     * @param address   the inet address.
-     * @param port      the port number.
-     *                  {@code -1} indicates the scheme default port.
-     *
-     * @throws IllegalArgumentException
-     *             If the port parameter is outside the specified range of valid port values, which is between 0 and
-     *             65535, inclusive. {@code -1} indicates the scheme default port.
-     *
-     * @since 4.3
-     */
-    public HttpHost(final InetAddress address, final int port) {
-        this(null, address, port);
-    }
-
-    /**
-     * Creates {@code HttpHost} instance with the default scheme and port and the given inet
-     * address.
-     *
-     * @param address   the inet address.
-     *
-     * @throws IllegalArgumentException
-     *             If the port parameter is outside the specified range of valid port values, which is between 0 and
-     *             65535, inclusive. {@code -1} indicates the scheme default port.
-     *
-     * @since 4.3
-     */
-    public HttpHost(final InetAddress address) {
-        this(null, address, -1);
     }
 
     /**
@@ -285,17 +189,6 @@ public final class HttpHost implements NamedEndpoint, Serializable {
     }
 
     /**
-     * Returns the inet address if explicitly set by a constructor,
-     *   {@code null} otherwise.
-     * @return the inet address
-     *
-     * @since 4.3
-     */
-    public InetAddress getAddress() {
-        return this.address;
-    }
-
-    /**
      * Return the host URI, as a string.
      *
      * @return the host URI
@@ -307,17 +200,6 @@ public final class HttpHost implements NamedEndpoint, Serializable {
         buffer.append(this.host.toString());
         return buffer.toString();
     }
-
-
-    /**
-     * Obtains the host string, without scheme prefix.
-     *
-     * @return  the host string, for example {@code localhost:8080}
-     */
-    public String toHostString() {
-        return this.host.toString();
-    }
-
 
     @Override
     public String toString() {

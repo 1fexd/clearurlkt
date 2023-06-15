@@ -48,10 +48,6 @@ public enum URIScheme {
         return id;
     }
 
-    public boolean same(final String scheme) {
-        return id.equalsIgnoreCase(scheme);
-    }
-
     @Override
     public String toString() {
         return id;

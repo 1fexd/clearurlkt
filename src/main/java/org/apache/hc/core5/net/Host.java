@@ -95,11 +95,6 @@ public final class Host implements NamedEndpoint, Serializable {
         return new Host(hostName, port);
     }
 
-    static Host parse(final CharSequence s) throws URISyntaxException {
-        final Tokenizer.Cursor cursor = new Tokenizer.Cursor(0, s.length());
-        return parse(s, cursor);
-    }
-
     static void format(final StringBuilder buf, final NamedEndpoint endpoint) {
         final String hostName = endpoint.getHostName();
         if (InetAddressUtils.isIPv6Address(hostName)) {

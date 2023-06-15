@@ -100,10 +100,6 @@ public final class URIAuthority implements NamedEndpoint, Serializable {
         this.host = new Host(hostname, port);
     }
 
-    public URIAuthority(final String hostname, final int port) {
-        this(null, hostname, port);
-    }
-
     /**
      * @since 5.2
      */
@@ -117,22 +113,11 @@ public final class URIAuthority implements NamedEndpoint, Serializable {
     /**
      * @since 5.2
      */
-    public URIAuthority(final Host host) {
-        this(null, host);
-    }
-
-    /**
-     * @since 5.2
-     */
     public URIAuthority(final String userInfo, final NamedEndpoint endpoint) {
         super();
         Args.notNull(endpoint, "Endpoint");
         this.userInfo = userInfo;
         this.host = new Host(endpoint.getHostName(), endpoint.getPort());
-    }
-
-    public URIAuthority(final NamedEndpoint namedEndpoint) {
-        this(null, namedEndpoint);
     }
 
     /**
@@ -148,10 +133,6 @@ public final class URIAuthority implements NamedEndpoint, Serializable {
             throw URISupport.createException(s, cursor, "Unexpected content");
         }
         return uriAuthority;
-    }
-
-    public URIAuthority(final String hostname) {
-        this(null, hostname, -1);
     }
 
     public String getUserInfo() {

@@ -56,5 +56,4 @@ final class URISupport {
                 reason,
                 cursor.getPos());
     }
-
 }
