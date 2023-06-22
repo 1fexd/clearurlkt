@@ -1,7 +1,11 @@
 package fe.clearurlskt
 
-import org.apache.hc.core5.net.URIBuilder
-import java.net.*
+import fe.uribuilder.fragments
+import fe.uribuilder.keyValueMapToString
+import fe.uribuilder.parseUri
+import fe.uribuilder.urlWithoutParamsAndHash
+import java.net.URL
+import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
 fun printlnDebug(str: String, debugPrint: Boolean) {
@@ -47,16 +51,7 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
                 }
             }
 
-            val firstHashIndex = editUrl.indexOf("#")
-            if (firstHashIndex > -1 && editUrl.indexOf("#", firstHashIndex + 1) > -1) {
-                editUrl = editUrl.substring(0, firstHashIndex) + "#" + URLEncoder.encode(
-                    editUrl.substring(firstHashIndex + 1),
-                    StandardCharsets.UTF_8
-                )
-            }
-
-            val uriObj = URI(editUrl)
-            val uriBuilder = URIBuilder(uriObj)
+            val (uriObj, uriBuilder) = parseUri(editUrl)
 
             val fields = uriBuilder.queryParams.associateTo(LinkedHashMap<String, String>()) { it.name to it.value }
             val fragments = uriBuilder.fragments()
