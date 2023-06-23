@@ -1,9 +1,6 @@
 package fe.clearurlskt
 
-import fe.uribuilder.fragments
-import fe.uribuilder.keyValueMapToString
-import fe.uribuilder.parseUri
-import fe.uribuilder.urlWithoutParamsAndHash
+import fe.uribuilder.*
 import java.net.URL
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
@@ -51,13 +48,13 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
                 }
             }
 
-            val (uriObj, uriBuilder) = parseUri(editUrl)
+            val parsedUri = UriParser.parseUri(editUrl)
 
-            val fields = uriBuilder.queryParams.associateTo(LinkedHashMap<String, String>()) { it.name to it.value }
-            val fragments = uriBuilder.fragments()
-            val domain = urlWithoutParamsAndHash(uriObj).toString()
+            val fields = parsedUri.queryParams.associateTo(LinkedHashMap<String, String>()) { it.name to it.value }
+            val fragments = parsedUri.fragments
+            val domain = parsedUri.uri.urlWithoutParamsAndHash().toString()
 
-            printlnDebug("\tFields: $fields, Fragments: $fragments (${uriBuilder.fragment})", debugPrint)
+            printlnDebug("\tFields: $fields, Fragments: $fragments (${parsedUri.fragment})", debugPrint)
             if (fields.isNotEmpty() || fragments.isNotEmpty()) {
                 provider.rules.forEach { rule ->
                     val removeFields = mutableListOf<String>()

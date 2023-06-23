@@ -2,7 +2,6 @@ package fe.clearurlkt
 
 import fe.clearurlskt.ClearURLLoader
 import fe.clearurlskt.clearUrl
-import org.apache.hc.core5.net.URIBuilder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
