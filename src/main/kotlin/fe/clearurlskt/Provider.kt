@@ -5,43 +5,40 @@ import fe.gson.extensions.array
 import fe.gson.extensions.bool
 import fe.gson.extensions.string
 
-class Provider(val key: String, val urlPattern: String, val completeProvider: Boolean = true) {
-    val rules = mutableListOf<Regex>()
-    val rawRules = mutableListOf<Regex>()
-    val referralMarketing = mutableListOf<Regex>()
-    val exceptions = mutableListOf<Regex>()
-    val redirections = mutableListOf<Regex>()
-    val forceRedirection = false
+data class Provider(
+    val key: String,
+    val url: Regex,
+    val completeProvider: Boolean,
+    val rules: List<Regex>,
+    val rawRules: List<Regex>,
+    val referralMarketing: List<Regex>,
+    val exceptions: List<Regex>,
+    val redirections: List<Regex>,
+)
 
-    val urlPatternRegex by lazy { Regex(urlPattern) }
+fun String.toIgnoreCaseRegex(exactly: Boolean = false): Regex {
+    return Regex(if (exactly) "^$this$" else this, RegexOption.IGNORE_CASE)
+}
+
+fun JsonObject.arrayByNametoIgnoreCaseRegexList(name: String, exactly: Boolean = false): List<Regex> {
+    return array(name).map { it.asJsonPrimitive.asString.toIgnoreCaseRegex(exactly) }
 }
 
 fun loadClearUrlsProviders(json: JsonObject): List<Provider> {
     var globalRulesProvider: Provider? = null
     val providers = json.entrySet().mapNotNull { (key, element) ->
         val obj = element as JsonObject
-        val provider = Provider(key, obj.string("urlPattern") ?: "", obj.bool("completeProvider") ?: false)
 
-//        provider.urlPattern = Regex(obj.string("urlPattern") ?: "", RegexOption.IGNORE_CASE)
-        obj.array("rules").forEach {
-            provider.rules.add(Regex("^${it.asJsonPrimitive.asString}$", RegexOption.IGNORE_CASE))
-        }
-
-        obj.array("rawRules").forEach {
-            provider.rawRules.add(Regex(it.asJsonPrimitive.asString, RegexOption.IGNORE_CASE))
-        }
-
-        obj.array("referralMarketing").forEach {
-            provider.referralMarketing.add(Regex(it.asJsonPrimitive.asString))
-        }
-
-        obj.array("exceptions").forEach {
-            provider.exceptions.add(Regex(it.asJsonPrimitive.asString))
-        }
-
-        obj.array("redirections").forEach {
-            provider.redirections.add(Regex(it.asJsonPrimitive.asString))
-        }
+        val provider = Provider(
+            key,
+            obj.string("urlPattern")!!.toIgnoreCaseRegex(),
+            obj.bool("completeProvider") ?: false,
+            obj.arrayByNametoIgnoreCaseRegexList("rules",true),
+            obj.arrayByNametoIgnoreCaseRegexList("rawRules"),
+            obj.arrayByNametoIgnoreCaseRegexList("referralMarketing"),
+            obj.arrayByNametoIgnoreCaseRegexList("exceptions"),
+            obj.arrayByNametoIgnoreCaseRegexList("redirections"),
+        )
 
         if (key == "globalRules") {
             globalRulesProvider = provider

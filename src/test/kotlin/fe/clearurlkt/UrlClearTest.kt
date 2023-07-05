@@ -12,6 +12,8 @@ class UrlClearTest {
 
         mapOf(
             "https://deezer.com/track/891177062" to "https://deezer.com/track/891177062?utm_source=deezer",
+            "https://DEEZER.com/track/891177062" to "https://DEEZER.com/track/891177062?utm_source=deezer",
+            "HTTPS://DEEZER.com/TRACK/891177062" to "HTTPS://DEEZER.com/TRACK/891177062?UTM_SOURCE=deezer",
             "https://pypi.org/project/Unalix" to "https://www.google.com/url?q=https://pypi.org/project/Unalix",
             "https://de.statista.com/infografik/amp/22496/anzahl-der-gesamten-positiven-corona-tests-und-positivenrate/" to "https://www.google.com/amp/s/de.statista.com/infografik/amp/22496/anzahl-der-gesamten-positiven-corona-tests-und-positivenrate/",
             "https://www.amazon.com/gp/B08CH7RHDP" to "https://www.amazon.com/gp/B08CH7RHDP/ref=as_li_ss_tl",
