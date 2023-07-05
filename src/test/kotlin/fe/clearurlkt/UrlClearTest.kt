@@ -36,7 +36,7 @@ class UrlClearTest {
                     to "https://ingka.page.link/?link=https://order.ikea.com/at/history/%23/lookup?orderId%3Dfuck_you_ikea%26lid%3Dyeeeet&apn=com.ingka.ikea.app&afl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&ibi=com.ingka.ikea.app&ifl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&ofl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&imv=14.88.69&amv=8869"
         ).forEach { (expected, input) ->
             println("Expected: $expected")
-            assertEquals(expected, clearUrl(input, providers, true))
+            assertEquals(expected, clearUrl(input, providers, System.out))
         }
     }
 }

@@ -1,19 +1,16 @@
 package fe.clearurlskt
 
 import fe.uribuilder.*
+import java.io.PrintStream
 import java.net.URL
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
-fun printlnDebug(str: String, debugPrint: Boolean) {
-    if (debugPrint) println(str)
-}
-
-fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false): String {
+fun clearUrl(url: String, providers: List<Provider>, debugWriter: PrintStream? = null): String {
     var editUrl = url.trim()
     providers.forEach { provider ->
         if (provider.url.containsMatchIn(editUrl)) {
-            printlnDebug(provider.key, debugPrint)
+            debugWriter?.println(provider.key)
 
             provider.exceptions.forEach {
                 if (it.containsMatchIn(editUrl)) {
@@ -23,7 +20,7 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
 
             provider.redirections.forEach {
                 val result = it.find(editUrl)
-                printlnDebug("Redirection: $it $result", debugPrint)
+                debugWriter?.println("Redirection: $it $result")
                 if (result != null) {
                     val (_, redirect) = result.groupValues
                     val resultUrl = URLDecoder.decode(redirect, StandardCharsets.UTF_8)
@@ -35,7 +32,7 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
                         }
                     }
 
-                    return clearUrl(resultUrl.toString(), providers, debugPrint)
+                    return clearUrl(resultUrl.toString(), providers, debugWriter)
                 }
             }
 
@@ -44,7 +41,7 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
                 editUrl = editUrl.replace(rawRule, "")
 
                 if (preReplaceUrl != editUrl) {
-                    printlnDebug("Raw url: $preReplaceUrl $editUrl", debugPrint)
+                    debugWriter?.println("Raw url: $preReplaceUrl $editUrl")
                 }
             }
 
@@ -54,14 +51,14 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
             val fragments = parsedUri.fragments
             val domain = parsedUri.uri.urlWithoutParamsAndHash().toString()
 
-            printlnDebug("\tFields: $fields, Fragments: $fragments (${parsedUri.fragment})", debugPrint)
+            debugWriter?.println("\tFields: $fields, Fragments: $fragments (${parsedUri.fragment})")
             if (fields.isNotEmpty() || fragments.isNotEmpty()) {
                 provider.rules.forEach { rule ->
                     val removeFields = mutableListOf<String>()
                     fields.forEach { (field, _) ->
                         if (rule.containsMatchIn(field)) {
                             removeFields.add(field)
-                            printlnDebug("\tRemoving field $field", debugPrint)
+                            debugWriter?.println("\tRemoving field $field")
                         }
                     }
 
@@ -71,7 +68,7 @@ fun clearUrl(url: String, providers: List<Provider>, debugPrint: Boolean = false
                     fragments.forEach { (fragment, _) ->
                         if (rule.containsMatchIn(fragment)) {
                             fragments.remove(fragment)
-                            printlnDebug("\tRemoving fragment $fragment", debugPrint)
+                            debugWriter?.println("\tRemoving fragment $fragment")
                         }
                     }
 
