@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.8.21"
+    kotlin("jvm") version "1.9.0"
     java
     `maven-publish`
     id("net.nemerosa.versioning") version "3.0.0"
@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.gitlab.grrfe:GSONKtExtensions:2.1.2")
+    implementation("com.gitlab.grrfe:gson-ext:8.1.2")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.1fexd:uriparser:0.0.7")
 

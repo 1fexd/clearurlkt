@@ -1,9 +1,9 @@
 package fe.clearurlskt
 
 import com.google.gson.JsonObject
-import fe.gson.extensions.array
-import fe.gson.extensions.bool
-import fe.gson.extensions.string
+import fe.gson.extension.json.`object`.asArray
+import fe.gson.extension.json.`object`.asBooleanOrNull
+import fe.gson.extension.json.`object`.asString
 
 data class Provider(
     val key: String,
@@ -21,7 +21,7 @@ fun String.toIgnoreCaseRegex(exactly: Boolean = false): Regex {
 }
 
 fun JsonObject.arrayByNametoIgnoreCaseRegexList(name: String, exactly: Boolean = false): List<Regex> {
-    return array(name).map { it.asJsonPrimitive.asString.toIgnoreCaseRegex(exactly) }
+    return asArray(name).map { it.asJsonPrimitive.asString.toIgnoreCaseRegex(exactly) }
 }
 
 fun loadClearUrlsProviders(json: JsonObject): List<Provider> {
@@ -31,9 +31,9 @@ fun loadClearUrlsProviders(json: JsonObject): List<Provider> {
 
         val provider = Provider(
             key,
-            obj.string("urlPattern")!!.toIgnoreCaseRegex(),
-            obj.bool("completeProvider") ?: false,
-            obj.arrayByNametoIgnoreCaseRegexList("rules",true),
+            obj.asString("urlPattern").toIgnoreCaseRegex(),
+            obj.asBooleanOrNull("completeProvider") ?: false,
+            obj.arrayByNametoIgnoreCaseRegexList("rules", true),
             obj.arrayByNametoIgnoreCaseRegexList("rawRules"),
             obj.arrayByNametoIgnoreCaseRegexList("referralMarketing"),
             obj.arrayByNametoIgnoreCaseRegexList("exceptions"),
