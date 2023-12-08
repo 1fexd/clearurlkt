@@ -141,7 +141,8 @@
                 "sxsrf",
                 "rlz",
                 "i-would-rather-use-firefox",
-                "pcampaignid"
+                "pcampaignid",
+                "sca_esv"
             ],
             "referralMarketing": [
                 "referrer"
@@ -155,7 +156,8 @@
                 "^https?:\\/\\/news\\.google\\.com.*\\?hl=.",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/s\\?tbm=map.*?gs_[a-z]*=.",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/(?:complete\\/search|setprefs|searchbyimage)",
-                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/(?:appsactivity|aclk\\?)"
+                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/(?:appsactivity|aclk\\?)",
+                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/safe[-]?browsing\\/([^&]+)"
             ],
             "redirections": [
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/url\\?.*?(?:url|q)=(https?[^&]+)",
@@ -302,12 +304,14 @@
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?onet\\.pl\\/[^?]*\\?.*?utm_campaign=.",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?stripe\\.com\\/[^?]+.*?&?referrer=[^/?&]*",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?lichess\\.org\\/login.*?&?referrer=.*?",
+                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?microsoft\\.com\\/.*?research\\/redirect",
                 "^https?:\\/\\/like.co\\/api\\/like\\/likebutton\\/[^?]+.*?&?referrer=[^/?&]*",
                 "^https?:\\/\\/button.like.co\\/in\\/.*?&?referrer=[^/?&]*",
                 "^https?:\\/\\/www\\.mma\\.go\\.kr",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?github\\.com",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?billiger\\.de\\/.*?mc=",
-                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?\\.youtrack\\.cloud"
+                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?\\.youtrack\\.cloud",
+                "^https?:\\/\\cu\\.bankid\\.com"
             ],
             "redirections": [],
             "forceRedirection": false
@@ -367,12 +371,13 @@
             "forceRedirection": false
         },
         "youtube": {
-            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?youtube\\.com",
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?(youtube\\.com|youtu\\.be)",
             "completeProvider": false,
             "rules": [
                 "feature",
                 "gclid",
-                "kw"
+                "kw" ,
+                "si"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -469,6 +474,7 @@
                 "ref_campaign",
                 "ref_source",
                 "%243p",
+                "rdt",
                 "\\$3p",
                 "%24original_url",
                 "\\$original_url",
@@ -2824,6 +2830,66 @@
             "rawRules": [],
             "exceptions": [],
             "redirections": [],
+            "forceRedirection": false
+        },
+        "href.li": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?href\\.li",
+            "completeProvider": false,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [
+                "^https?:\\/\\/href\\.li\\/\\?(http.+)"
+            ],
+            "forceRedirection": false
+        },
+        "adform.net": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?adform\\.net",
+            "completeProvider": false,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [
+                "^https?:\\/\\/track\\.adform\\.net\\/C\\/.*?ckurl=([^&]+)"
+            ],
+            "forceRedirection": false
+        },
+        "artefact.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?artefact\\.com",
+            "completeProvider": false,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [
+                "^https?:\\/\\/.*?artefact\\.com\\/trck\\/.*?deeplinkurl=([^&]+)"
+            ],
+            "forceRedirection": false
+        },
+        "awin1.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?awin1\\.com",
+            "completeProvider": false,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [
+                "^https?:\\/\\/.*?awin1\\.com\\/.*?ued=([^&]+)"
+            ],
+            "forceRedirection": false
+        },
+        "telekom.de": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?telekom\\.de",
+            "completeProvider": false,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [
+                "^https?:\\/\\/aaa\\.telekom\\.de\\/trck\\/.*?deeplinkurl=([^&]+)"
+            ],
             "forceRedirection": false
         }
     }
