@@ -10,7 +10,7 @@ version = versioning.info.tag ?: versioning.info.full
 
 repositories {
     mavenCentral()
-    maven(url="https://jitpack.io")
+    maven(url = "https://jitpack.io")
 }
 
 dependencies {
@@ -22,7 +22,7 @@ dependencies {
 }
 
 tasks.withType<Jar> {
-    exclude("fetch_latest_clearurls.sh")
+    sourceSets.main.get().output.resourcesDir?.listFiles()?.map { it.name }?.let { exclude(it) }
 }
 
 tasks.test {
