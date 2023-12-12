@@ -22,7 +22,8 @@ dependencies {
 }
 
 tasks.withType<Jar> {
-    sourceSets.main.get().output.resourcesDir?.listFiles()?.map { it.name }?.let { exclude(it) }
+    sourceSets.main.get().output.resourcesDir?.listFiles()?.filter { it.extension != "json" }?.map { it.name }
+        ?.let { exclude(it) }
 }
 
 tasks.test {
