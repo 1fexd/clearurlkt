@@ -45,7 +45,13 @@ fun clearUrl(url: String, providers: List<Provider>, debugWriter: PrintStream? =
                 }
             }
 
-            val parsedUri = UriParser.parseUri(editUrl)
+            val parseResult = UriParser.parseUri(editUrl)
+            if (parseResult is UriParseResult.ParserFailure) {
+                debugWriter?.println("Failed to parse $editUrl: ${parseResult.exception.message}")
+                return editUrl
+            }
+
+            val parsedUri = parseResult as UriParseResult.ParsedUri
 
             val fields = parsedUri.queryParams.associateTo(LinkedHashMap<String, String>()) { it.name to it.value }
             val fragments = parsedUri.fragments

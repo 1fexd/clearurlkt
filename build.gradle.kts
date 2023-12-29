@@ -16,7 +16,7 @@ repositories {
 dependencies {
     implementation("com.gitlab.grrfe:gson-ext:11.0.0")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.github.1fexd:uriparser:0.0.7")
+    implementation("com.github.1fexd:uriparser:0.0.9")
 
     testImplementation(kotlin("test"))
 }
