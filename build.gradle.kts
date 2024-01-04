@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.22"
     java
     `maven-publish`
     id("net.nemerosa.versioning") version "3.0.0"
@@ -19,6 +19,10 @@ dependencies {
     implementation("com.github.1fexd:uriparser:0.0.9")
 
     testImplementation(kotlin("test"))
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 tasks.test {
