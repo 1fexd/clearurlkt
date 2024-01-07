@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import fe.buildsrc.Package.relocatePackages
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -16,9 +17,10 @@ repositories {
     maven(url = "https://jitpack.io")
 }
 
-val implementation: Configuration by configurations
-val shadowImplementation: Configuration by configurations.creating
-implementation.extendsFrom(shadowImplementation)
+val shadowImplementation = configurations.create("shadowImplementation"){
+    configurations.implementation.get().extendsFrom(this)
+    isTransitive = true
+}
 
 dependencies {
     api(kotlin("stdlib"))
@@ -38,8 +40,8 @@ val shadowJarTask = tasks.named<ShadowJar>("shadowJar") {
     mergeServiceFiles()
     exclude("META-INF/**/*")
 
-    listOf("fe.gson", "com.google.gson").forEach { pkg ->
-        relocate(pkg, "fe.clearurlskt.internal.$pkg")
+    project.relocatePackages(shadowImplementation, "fe.clearurlskt").forEach { (from, to) ->
+        relocate(from, to)
     }
 
     archiveClassifier.set("")
