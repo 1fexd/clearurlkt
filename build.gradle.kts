@@ -1,13 +1,9 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.jetbrains.kotlin.utils.IDEAPluginsCompatibilityAPI
-import org.jetbrains.kotlin.utils.addToStdlib.firstNotNullResult
-import java.net.URL
 
 plugins {
     kotlin("jvm") version "1.9.22"
     `java-library`
     `maven-publish`
-    `project-report`
     id("net.nemerosa.versioning") version "3.0.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
