@@ -1,7 +1,7 @@
 package fe.clearurlkt
 
+import fe.clearurlskt.ClearURL.clearUrl
 import fe.clearurlskt.ClearURLLoader
-import fe.clearurlskt.clearUrl
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
