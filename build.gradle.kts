@@ -67,13 +67,6 @@ publishing {
     }
 }
 
-//configurations {
-//    artifacts {
-//        runtimeElements(shadowJarTask)
-//        apiElements(shadowJarTask)
-//    }
-//}
-
 tasks.whenTaskAdded {
     if (name == "generateMetadataFileForPluginShadowPublication") {
         dependsOn(shadowJarTask)
