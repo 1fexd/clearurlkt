@@ -17,7 +17,7 @@ repositories {
     maven(url = "https://jitpack.io")
 }
 
-val shadowImplementation = configurations.create("shadowImplementation"){
+val shadowImplementation: Configuration = configurations.create("shadowImplementation"){
     configurations.implementation.get().extendsFrom(this)
     isTransitive = false
 }
@@ -45,7 +45,6 @@ val shadowJarTask = tasks.named<ShadowJar>("shadowJar") {
     }
 
     archiveClassifier.set("")
-//    minimize()
     configurations = listOf(shadowImplementation)
 }
 
