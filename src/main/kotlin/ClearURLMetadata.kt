@@ -1,4 +1,4 @@
 object ClearURLsMetadata {
-    const val gitHash = "528c247512895ecfac5aea34ba97c65818fb7061"
-    const val fetchedAt = 1704643148817L
+    const val gitHash = "14b6d06b3a012085f37fba321d50e74c6700e580"
+    const val fetchedAt = 1708014229237L
 }

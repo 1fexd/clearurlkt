@@ -1,6 +1,8 @@
 package fe.clearurlskt
 
 import fe.uribuilder.*
+import org.apache.hc.core5.http.NameValuePair
+import org.apache.hc.core5.http.message.BasicNameValuePair
 import java.io.PrintStream
 import java.net.URL
 import java.net.URLDecoder
@@ -11,7 +13,7 @@ object ClearURL {
         var editUrl = url.trim()
         providers.forEach { provider ->
             if (provider.url.containsMatchIn(editUrl)) {
-                debugWriter?.println(provider.key)
+                debugWriter?.println("${provider.key} has match for $editUrl")
 
                 provider.exceptions.forEach {
                     if (it.containsMatchIn(editUrl)) {
@@ -56,7 +58,6 @@ object ClearURL {
 
                 val fields = parsedUri.queryParams.associateTo(LinkedHashMap<String, String>()) { it.name to it.value }
                 val fragments = parsedUri.fragments
-                val domain = parsedUri.uri.urlWithoutParamsAndHash().toString()
 
                 debugWriter?.println("\tFields: $fields, Fragments: $fragments (${parsedUri.fragment})")
                 if (fields.isNotEmpty() || fragments.isNotEmpty()) {
@@ -82,17 +83,26 @@ object ClearURL {
                         removeFragments.forEach { fragments.remove(it) }
                     }
 
-                    var finalURL = domain
+                    val newUri = UriParseResult.ParsedUri(
+                        parsedUri.scheme,
+                        null,
+                        parsedUri.encodedAuthority,
+                        parsedUri.uri,
+                        parsedUri.host,
+                        parsedUri.port,
+                        parsedUri.encodedUserInfo,
+                        parsedUri.userInfo,
+                        parsedUri.encodedPath,
+                        parsedUri.pathSegments,
+                        parsedUri.pathRootless,
+                        null,
+                        fields.map { BasicNameValuePair(it.key, it.value) },
+                        null,
+                        fragments.keyValueMapToString().takeIf { it.isNotEmpty() },
+                        Charsets.UTF_8
+                    )
 
-                    if (fields.isNotEmpty()) {
-                        finalURL += "?" + fields.keyValueMapToString()
-                    }
-
-                    if (fragments.isNotEmpty()) {
-                        finalURL += "#" + fragments.keyValueMapToString()
-                    }
-
-                    editUrl = finalURL
+                    editUrl = newUri.build().toString()
                 }
             }
         }

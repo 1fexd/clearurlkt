@@ -311,7 +311,7 @@
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?github\\.com",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?billiger\\.de\\/.*?mc=",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?\\.youtrack\\.cloud",
-                "^https?:\\/\\cu\\.bankid\\.com"
+                "^https?:\\/\\/cu\\.bankid\\.com"
             ],
             "redirections": [],
             "forceRedirection": false
@@ -460,6 +460,24 @@
             "rawRules": [],
             "exceptions": [
                 "^https?:\\/\\/twitter.com\\/i\\/redirect"
+            ],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "x": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?x.com",
+            "completeProvider": false,
+            "rules": [
+                "(?:ref_?)?src",
+                "s",
+                "cn",
+                "ref_url",
+                "t"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [
+                "^https?:\\/\\/x.com\\/i\\/redirect"
             ],
             "redirections": [],
             "forceRedirection": false
@@ -2890,6 +2908,46 @@
             "redirections": [
                 "^https?:\\/\\/aaa\\.telekom\\.de\\/trck\\/.*?deeplinkurl=([^&]+)"
             ],
+            "forceRedirection": false
+        },
+        "cc.loginfra.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?loginfra\\.com",
+            "completeProvider": false,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [
+                "^https?:\\/\\/cc\\.loginfra\\.com\\/.*?u=([^&]+)"
+            ],
+            "forceRedirection": false
+        },
+        "t.umblr.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?umblr\\.com",
+            "completeProvider": false,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [
+                "^https?:\\/\\/t\\.umblr\\.com\\/redirect\\?z=([^&]+)"
+            ],
+            "forceRedirection": false
+        },
+        "goodreads.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?goodreads\\.com",
+            "completeProvider": false,
+            "rules": [
+                "from_search",
+                "from_srp",
+                "qid",
+                "rank",
+                "ac"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
             "forceRedirection": false
         }
     }

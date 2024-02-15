@@ -1,74 +1,16 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import fe.buildsrc.Package.relocatePackages
+import fe.plugin.library.LibraryConfig.Companion.library
 
 plugins {
-    kotlin("jvm") version "1.9.22"
-    `java-library`
-    `maven-publish`
-    id("net.nemerosa.versioning") version "3.0.0"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gitlab.grrfe.common-gradle-plugin")
 }
 
-group = "fe.clearurlkt"
-version = versioning.info.tag ?: versioning.info.full
-
-repositories {
-    mavenCentral()
-    maven(url = "https://jitpack.io")
-}
-
-val shadowImplementation: Configuration = configurations.create("shadowImplementation"){
-    configurations.implementation.get().extendsFrom(this)
-    isTransitive = false
+library("fe.clearurlkt") {
+    jvm.set(17)
 }
 
 dependencies {
-    api(kotlin("stdlib"))
-
-    shadowImplementation("com.google.code.gson:gson:2.+")
-    shadowImplementation("com.gitlab.grrfe.gson-ext:core:14.0.2-gson2-koin3")
-    shadowImplementation("com.github.1fexd:uriparser:0.0.10")
-
-    testImplementation(kotlin("test"))
-}
-
-kotlin {
-    jvmToolchain(17)
-}
-
-val shadowJarTask = tasks.named<ShadowJar>("shadowJar") {
-    mergeServiceFiles()
-    exclude("META-INF/**/*")
-
-    project.relocatePackages(shadowImplementation, "com.github.1fexd.clearurlkt").forEach { (from, to) ->
-        relocate(from, to)
-    }
-
-    archiveClassifier.set("")
-    configurations = listOf(shadowImplementation)
-}
-
-
-tasks.named("jar").configure {
-    enabled = false
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("shadow") {
-            setArtifacts(listOf(shadowJarTask.get()))
-            groupId = project.group.toString()
-            version = project.version.toString()
-        }
-    }
-}
-
-tasks.whenTaskAdded {
-    if (name == "generateMetadataFileForPluginShadowPublication") {
-        dependsOn(shadowJarTask)
-    }
+    relocate("com.google.code.gson:gson:2.10.1")
+    relocate("com.gitlab.grrfe:gson-ext:11.0.0")
+//    relocate("com.gitlab.grrfe.gson-ext:core:14.0.2-gson2-koin3")
+    relocate("com.github.1fexd:uriparser:0.0.10")
 }
