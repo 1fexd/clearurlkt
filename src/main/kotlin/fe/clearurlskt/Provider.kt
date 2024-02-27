@@ -20,7 +20,7 @@ fun String.toIgnoreCaseRegex(exactly: Boolean = false): Regex {
     return Regex(if (exactly) "^$this$" else this, RegexOption.IGNORE_CASE)
 }
 
-fun JsonObject.arrayByNametoIgnoreCaseRegexList(name: String, exactly: Boolean = false): List<Regex> {
+fun JsonObject.arrayByNameToIgnoreCaseRegexList(name: String, exactly: Boolean = false): List<Regex> {
     return asArray(name).map { it.asJsonPrimitive.asString.toIgnoreCaseRegex(exactly) }
 }
 
@@ -33,11 +33,11 @@ fun loadClearUrlsProviders(json: JsonObject): List<Provider> {
             key,
             obj.asString("urlPattern").toIgnoreCaseRegex(),
             obj.asBooleanOrNull("completeProvider") ?: false,
-            obj.arrayByNametoIgnoreCaseRegexList("rules", true),
-            obj.arrayByNametoIgnoreCaseRegexList("rawRules"),
-            obj.arrayByNametoIgnoreCaseRegexList("referralMarketing"),
-            obj.arrayByNametoIgnoreCaseRegexList("exceptions"),
-            obj.arrayByNametoIgnoreCaseRegexList("redirections"),
+            obj.arrayByNameToIgnoreCaseRegexList("rules", true),
+            obj.arrayByNameToIgnoreCaseRegexList("rawRules"),
+            obj.arrayByNameToIgnoreCaseRegexList("referralMarketing"),
+            obj.arrayByNameToIgnoreCaseRegexList("exceptions"),
+            obj.arrayByNameToIgnoreCaseRegexList("redirections"),
         )
 
         if (key == "globalRules") {

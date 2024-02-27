@@ -8,10 +8,11 @@ import fe.gson.util.Json
 import java.io.InputStream
 
 object ClearURLLoader {
-    fun loadBuiltInClearURLProviders() = loadClearUrlsProviders(
-        loadClearUrlsJson(ClearURLResource.getBuiltInClearUrlsJson()!!)
-            .asObject("providers")
-    )
+    fun loadBuiltInClearURLProviders(): List<Provider> {
+        return loadClearUrlsProviders(
+            loadClearUrlsJson(ClearURLResource.getBuiltInClearUrlsJson()!!).asObject("providers")
+        )
+    }
 
     fun loadClearUrlsJson(inputStream: InputStream): JsonObject {
         return inputStream.fromJson<JsonObject>()
