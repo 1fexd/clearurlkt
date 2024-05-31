@@ -38,7 +38,7 @@ class UrlClearTest {
                     to "https://m.facebook.com/v16.0/dialog/oauth?cct_prefetching=0&client_id=cringe&cbt=lol&e2e=xd&ies=0&sdk=android-16.1.3&sso=chrome_custom_tab&nonce=jabro&scope=openid%2Cpublic_profile%2Cemail&state=Lule&code_challenge_method=S256&default_audience=friends&login_behavior=NATIVE_WITH_FALLBACK&redirect_uri=fbconnect%3A%2F%2Fnö&auth_type=rerequest&response_type=id_token%2Ctoken%2Csigned_request%2Cgraph_domain&return_scopes=true&code_challenge=facebook_sucks",
             "https://analyticsindiamag.com/iit-bombay-joins-ibm-meta-to-form-ai-alliance-challenging-openai-google-amazon-microsoft/" to "https://analyticsindiamag.com/iit-bombay-joins-ibm-meta-to-form-ai-alliance-challenging-openai-google-amazon-microsoft/?utm_source=rss&utm_medium=rss&utm_campaign=iit-bombay-joins-ibm-meta-to-form-ai-alliance-challenging-openai-google-amazon-microsoft",
             "https://www.google.com/search?q=%E4%B8%AD%E6%96%87" to "https://www.google.com/search?q=%E4%B8%AD%E6%96%87",
-            "https://myanimelist.net/v1/oauth2/authorize?client_id=xd&code_challenge=lule123&response_type=code" to "https://myanimelist.net/v1/oauth2/authorize?client_id=xd&code_challenge=lule123&response_type=code"
+            "https://myanimelist.net/v1/oauth2/authorize?client_id=xd&code_challenge=lule123&response_type=code" to "https://myanimelist.net/v1/oauth2/authorize?client_id=xd&code_challenge=lule123&response_type=code",
         ).forEach { (expected, input) ->
             println("Expected: $expected")
             assertEquals(expected, clearUrl(input, providers, System.out))

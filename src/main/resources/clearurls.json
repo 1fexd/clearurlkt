@@ -35,7 +35,9 @@
                 "camp",
                 "creative",
                 "s",
-                "content-id"
+                "content-id",
+                "dib",
+                "dib_tag"
             ],
             "referralMarketing": [
                 "tag",
@@ -48,6 +50,19 @@
             "rawRules": [
                 "\\/ref=[^/?]*"
             ],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "msn": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?msn\\.com",
+            "completeProvider": false,
+            "rules": [
+                "cvid",
+                "ocid"
+            ],
+            "rawRules": [],
+            "referralMarketing": [],
+            "exceptions": [],
             "redirections": [],
             "forceRedirection": false
         },
@@ -150,6 +165,8 @@
             "rawRules": [],
             "exceptions": [
                 "^https?:\\/\\/mail\\.google\\.com\\/mail\\/u\\/",
+                "^https?:\\/\\/accounts\\.google\\.com\\/o\\/oauth2\\/",
+                "^https?:\\/\\/accounts\\.google\\.com\\/signin\\/oauth\\/",
                 "^https?:\\/\\/(?:docs|accounts)\\.google(?:\\.[a-z]{2,}){1,}",
                 "^https?:\\/\\/([a-z0-9-\\.])*(chat|drive)\\.google\\.com\\/videoplayback",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}(?:\\/upload)?\\/drive\\/",
@@ -273,6 +290,7 @@
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?matrix\\.org\\/_matrix\\/",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?(?:cloudflare\\.com|prismic\\.io|tangerine\\.ca|gitlab\\.com)",
                 "^https?:\\/\\/myaccount.google(?:\\.[a-z]{2,}){1,}",
+                "^https?:\\/\\/accounts.google(?:\\.[a-z]{2,}){1,}",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?gcsip\\.(?:com|nl)[^?]*\\?.*?&?ref_?=.",
                 "^https?:\\/\\/[^/]+/[^/]+/[^/]+\\/-\\/refs\\/switch[^?]*\\?.*?&?ref_?=.",
                 "^https?:\\/\\/bugtracker\\.[^/]*\\/[^?]+\\?.*?&?ref_?=[^/?&]*",
@@ -429,7 +447,17 @@
                 "action_history",
                 "tracking",
                 "referral_code",
-                "referral_story_type"
+                "referral_story_type",
+                "eav",
+                "sfnsn",
+                "idorvanity",
+                "wtsid",
+                "rdc",
+                "rdr",
+                "paipv",
+                "_nc_x",
+                "_rdr",
+                "mibextid"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -1163,7 +1191,8 @@
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?instagram\\.com",
             "completeProvider": false,
             "rules": [
-                "igshid"
+                "igshid",
+                "igsh"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -1171,24 +1200,6 @@
             "redirections": [
                 ".*u=([^&]*)"
             ],
-            "forceRedirection": false
-        },
-        "lazada.com.my": {
-            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?lazada\\.com\\.my",
-            "completeProvider": false,
-            "rules": [
-                "ad_src",
-                "did",
-                "pa",
-                "mp",
-                "impsrc",
-                "cid",
-                "pos"
-            ],
-            "referralMarketing": [],
-            "rawRules": [],
-            "exceptions": [],
-            "redirections": [],
             "forceRedirection": false
         },
         "imgsrc.ru": {
@@ -2946,6 +2957,71 @@
             ],
             "referralMarketing": [],
             "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "sohu": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?sohu\\.com",
+            "completeProvider": false,
+            "rules": [
+                "pvid",
+                "scm"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "shopee": { 
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?shopee\\.(com|co\\.th)",
+            "completeProvider": false,
+            "rules": [
+                "publish_id",
+                "sp_atk",
+                "xptdk"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "lazada": { 
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?lazada\\.(com|co\\.th|co\\.id|com\\.my|com\\.ph|sg|vn)",
+            "completeProvider": false,
+            "rules": [
+                "clickTrackInfo",
+                "abid",
+                "pvid",
+                "ad_src",
+                "spm",
+                "src",
+                "from",
+                "scm",
+                "pa",
+                "pid_pvid",
+                "did",
+                "mp",
+                "cid",
+                "impsrc",
+                "pos"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "pantip.com": { 
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?pantip\\.com",
+            "completeProvider": false,
+            "rules": [],
+            "rawRules": [
+                "#lead.*"
+            ],
+            "referralMarketing": [],
             "exceptions": [],
             "redirections": [],
             "forceRedirection": false
