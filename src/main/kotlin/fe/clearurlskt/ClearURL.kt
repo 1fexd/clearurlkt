@@ -48,7 +48,7 @@ object ClearURL {
                     }
                 }
 
-                val parseResult = UriParser.parseUri(editUrl)
+                val parseResult = UriParser.parseUri(editUrl, Charsets.UTF_8)
                 if (parseResult is UriParseResult.ParserFailure) {
                     debugWriter?.println("Failed to parse $editUrl: ${parseResult.exception.message}")
                     return editUrl
@@ -59,6 +59,8 @@ object ClearURL {
                 val fields = parsedUri.queryParams.associateTo(LinkedHashMap<String, String>()) { it.name to it.value }
                 val fragments = parsedUri.fragments
 
+                var fieldsChanged = 0
+                var fragmentsChanged = 0
                 debugWriter?.println("\tFields: $fields, Fragments: $fragments (${parsedUri.fragment})")
                 if (fields.isNotEmpty() || fragments.isNotEmpty()) {
                     provider.rules.forEach { rule ->
@@ -66,6 +68,7 @@ object ClearURL {
                         fields.forEach { (field, _) ->
                             if (rule.containsMatchIn(field)) {
                                 removeFields.add(field)
+                                fieldsChanged++
                                 debugWriter?.println("\tRemoving field $field")
                             }
                         }
@@ -76,12 +79,18 @@ object ClearURL {
                         fragments.forEach { (fragment, _) ->
                             if (rule.containsMatchIn(fragment)) {
                                 fragments.remove(fragment)
+                                fragmentsChanged++
                                 debugWriter?.println("\tRemoving fragment $fragment")
                             }
                         }
 
                         removeFragments.forEach { fragments.remove(it) }
                     }
+
+                    debugWriter?.println("\tField changes: $fieldsChanged, Fragment changes: $fragmentsChanged")
+                    // If no fields/fragments have been removed, set the encoded query/fragment which will be used over the decoded field/fragment map if set
+                    val encodedQuery = if (fieldsChanged == 0) parseResult.encodedQuery else null
+                    val encodedFragment = if (fragmentsChanged == 0) parseResult.encodedFragment else null
 
                     val newUri = UriParseResult.ParsedUri(
                         parsedUri.scheme,
@@ -95,9 +104,9 @@ object ClearURL {
                         parsedUri.encodedPath,
                         parsedUri.pathSegments,
                         parsedUri.pathRootless,
-                        null,
+                        encodedQuery,
                         fields.map { BasicNameValuePair(it.key, it.value) },
-                        null,
+                        encodedFragment,
                         fragments.keyValueMapToString().takeIf { it.isNotEmpty() },
                         Charsets.UTF_8
                     )
