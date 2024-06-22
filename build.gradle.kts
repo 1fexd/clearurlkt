@@ -9,7 +9,7 @@ library("fe.clearurlkt") {
 }
 
 dependencies {
-    implementation("fe.gson.ext:core")
+    implementation("fe.gson-ext:core")
     implementation("fe.uribuilder:uriparser")
 //    implementation("org.apache.httpcomponents.core5:httpcore5:5.3-alpha1")
 //    implementation(project(":uriparser"))
