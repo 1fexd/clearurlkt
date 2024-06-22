@@ -1,4 +1,4 @@
-rootProject.name = "clearurlkt"
+rootProject.name = "clearurl"
 
 pluginManagement {
     repositories {
@@ -15,3 +15,6 @@ pluginManagement {
         }
     }
 }
+
+includeBuild("../gson-ext")
+includeBuild("../uriparser")

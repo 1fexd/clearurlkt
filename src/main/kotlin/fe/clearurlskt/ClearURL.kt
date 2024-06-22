@@ -1,7 +1,6 @@
 package fe.clearurlskt
 
 import fe.uribuilder.*
-import org.apache.hc.core5.http.NameValuePair
 import org.apache.hc.core5.http.message.BasicNameValuePair
 import java.io.PrintStream
 import java.net.URL
