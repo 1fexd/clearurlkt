@@ -1,6 +1,7 @@
 package fe.clearurlskt
 
 import com.google.gson.JsonObject
+import fe.gson.context.GlobalGsonContext
 import fe.gson.extension.json.`object`.asArray
 import fe.gson.extension.json.`object`.asBooleanOrNull
 import fe.gson.extension.json.`object`.asString
