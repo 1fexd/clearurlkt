@@ -39,7 +39,3 @@ publishing {
         }
     }
 }
-
-//gradle.includedBuilds.forEach { includedBuild ->
-//    println(includedBuild)
-//}

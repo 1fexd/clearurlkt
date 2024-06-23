@@ -13,20 +13,6 @@ pluginManagement {
         id("org.gradle.maven-publish")
         id("net.nemerosa.versioning") version "3.1.0"
     }
-
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == "com.gitlab.grrfe.common-gradle-plugin") {
-                useModule("${requested.id.id}:library:0.0.40")
-            }
-        }
-    }
 }
 
-include("core")
-
-
-
-
-//includeBuild("../gson-ext")
-//includeBuild("../uriparser")
+include("core", "bom")
