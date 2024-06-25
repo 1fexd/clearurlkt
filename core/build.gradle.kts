@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    api(platform("com.github.1fexd.super:platform:0.0.1"))
+    api(platform("com.github.1fexd:super:0.0.1"))
     api("com.gitlab.grrfe.gson-ext:core")
     api("com.github.1fexd:uriparser")
 
