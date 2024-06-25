@@ -13,8 +13,9 @@ repositories {
 }
 
 dependencies {
-    implementation("com.gitlab.grrfe.gson-ext:core:16.0.0-gson2-koin3")
-    implementation("com.github.1fexd:uriparser:0.0.11")
+    api(platform("com.github.1fexd.super:platform:0.0.1"))
+    api("com.gitlab.grrfe.gson-ext:core")
+    api("com.github.1fexd:uriparser")
 
     testImplementation(kotlin("test"))
 //    implementation("org.apache.httpcomponents.core5:httpcore5:5.3-alpha1")
