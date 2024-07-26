@@ -1,4 +1,8 @@
+import fe.buildsrc.MetadataGeneratorTask
+import fe.buildsrc.UpdateRulesTask
+
 plugins {
+    java
     kotlin("jvm")
     id("net.nemerosa.versioning") version "3.1.0"
     `maven-publish`
@@ -13,17 +17,26 @@ repositories {
 }
 
 dependencies {
-    api(platform("com.github.1fexd:super"))
-    api("com.gitlab.grrfe.gson-ext:core")
-    api("com.github.1fexd:uriparser")
+    api("com.gitlab.grrfe.gson-ext:core:16.0.0-gson2-koin3")
+    api("com.github.1fexd:uriparser:0.0.11")
 
     testImplementation(kotlin("test"))
-//    implementation("org.apache.httpcomponents.core5:httpcore5:5.3-alpha1")
-//    implementation(project(":uriparser"))
-//    relocate("com.google.code.gson:gson:2.10.1")
-//    relocate("com.gitlab.grrfe:gson-ext:11.0.0")
-//    relocate("com.gitlab.grrfe.gson-ext:core:14.0.2-gson2-koin3")
-//    relocate("com.github.1fexd:uriparser:0.0.11")
+}
+val generatedSrcDir = project.file("build/generated")
+
+val main by sourceSets
+main.java.srcDir(generatedSrcDir)
+
+val generateMetadata = tasks.register<MetadataGeneratorTask>("generateMetadata") {
+    group = "build"
+    dir = generatedSrcDir
+}
+
+val build by tasks
+build.dependsOn(generateMetadata)
+
+val updateRules = tasks.register<UpdateRulesTask>("updateRules") {
+    file = "src/main/resources/clearurls.json"
 }
 
 kotlin {

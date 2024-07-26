@@ -15,4 +15,4 @@ pluginManagement {
     }
 }
 
-include("core", "bom")
+include("core")
