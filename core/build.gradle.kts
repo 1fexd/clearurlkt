@@ -34,8 +34,8 @@ val generateMetadata = tasks.register<MetadataGeneratorTask>("generateMetadata")
     dir = generatedSrcDir
 }
 
-val classes by tasks
-classes.dependsOn(generateMetadata)
+val assemble by tasks
+assemble.dependsOn(generateMetadata)
 
 val updateRules = tasks.register<UpdateRulesTask>("updateRules") {
     file = "src/main/resources/clearurls.json"
