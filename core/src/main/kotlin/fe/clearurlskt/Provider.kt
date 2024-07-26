@@ -18,7 +18,8 @@ data class Provider(
 )
 
 fun String.toIgnoreCaseRegex(exactly: Boolean = false): Regex {
-    return Regex(if (exactly) "^$this$" else this, RegexOption.IGNORE_CASE)
+    val str = if (exactly) "^$this$" else this
+    return Regex(str, RegexOption.IGNORE_CASE)
 }
 
 fun JsonObject.arrayByNameToIgnoreCaseRegexList(name: String, exactly: Boolean = false): List<Regex> {
