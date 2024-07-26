@@ -22,7 +22,7 @@ dependencies {
 
     testImplementation(kotlin("test"))
 }
-val generatedSrcDir = project.file("build/generated")
+val generatedSrcDir = project.layout.buildDirectory.dir("generated/fe/clearurlskt").get().asFile
 
 val main by sourceSets
 main.java.srcDir(generatedSrcDir)

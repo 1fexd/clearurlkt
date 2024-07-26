@@ -15,7 +15,7 @@ abstract class MetadataGeneratorTask : DefaultTask() {
         val hash = getRulesHash()
         val javaFile = MetadataClassGenerator.build(System.currentTimeMillis(), hash)
 
-        val dir = project.file(dir.get())
+        val dir = dir.get()
         dir.mkdirs()
 
         File(dir, "${javaFile.typeSpec.name}.java").delete()
