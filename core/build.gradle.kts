@@ -22,14 +22,17 @@ dependencies {
 
     testImplementation(kotlin("test"))
 }
-val generatedSrcDir = project.layout.buildDirectory.dir("generated").get().asFile
+
+
+val generatedSrcDir = layout.buildDirectory.dir("generated/sources/$name/main/java")
 
 val main by sourceSets
 main.java.srcDir(generatedSrcDir)
+main.kotlin.srcDir(generatedSrcDir)
 
 val generateMetadata = tasks.register<MetadataGeneratorTask>("generateMetadata") {
     group = "build"
-    dir = generatedSrcDir
+    dir = generatedSrcDir.get().asFile
 }
 
 val classes by tasks
