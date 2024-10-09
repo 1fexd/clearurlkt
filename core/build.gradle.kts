@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "fe.clearurlkt"
-version = versioning.info.tag ?: versioning.info.full
+version = runCatching { versioning.info.tag ?: versioning.info.full }.getOrDefault("0.0.0")
 
 repositories {
     mavenCentral()
