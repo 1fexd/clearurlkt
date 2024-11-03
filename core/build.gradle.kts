@@ -1,6 +1,9 @@
 import fe.buildsrc.MetadataGeneratorTask
 import fe.buildsrc.UpdateRulesTask
 import fe.buildsrc.dependency.Grrfe
+import fe.buildsrc.publishing.PublicationComponent
+import fe.buildsrc.publishing.asProvider
+import fe.buildsrc.publishing.publish
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -57,9 +60,9 @@ java {
     withSourcesJar()
 }
 
-//publishing.publish(
-//    project,
-//    group.toString(),
-//    versioning.asProvider(project),
-//    PublicationComponent.JAVA
-//)
+publishing.publish(
+    project,
+    group.toString(),
+    versioning.asProvider(project),
+    PublicationComponent.JAVA
+)
