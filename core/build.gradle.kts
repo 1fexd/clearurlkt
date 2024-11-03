@@ -1,15 +1,16 @@
 import fe.buildsrc.MetadataGeneratorTask
 import fe.buildsrc.UpdateRulesTask
+import fe.buildsrc.dependency.Grrfe
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
     kotlin("jvm")
-    id("net.nemerosa.versioning") version "3.1.0"
+    id("net.nemerosa.versioning")
     `maven-publish`
 }
 
 group = "fe.clearurlkt"
-version = runCatching { versioning.info.tag ?: versioning.info.full }.getOrDefault("0.0.0")
 
 repositories {
     mavenCentral()
@@ -17,10 +18,14 @@ repositories {
 }
 
 dependencies {
-    api("com.gitlab.grrfe.gson-ext:core:16.0.0-gson2-koin3")
-    api("com.github.1fexd:uriparser:0.0.11")
+    api(Grrfe.ext.gson)
+    api(Grrfe.std.uri)
+    api(Grrfe.std.test)
+
 
     testImplementation(kotlin("test"))
+    testImplementation("com.willowtreeapps.assertk:assertk:_")
+    testImplementation(Grrfe.std.test)
 }
 
 
@@ -45,13 +50,18 @@ kotlin {
     jvmToolchain(17)
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = project.group.toString()
-            version = project.version.toString()
-
-            from(components["java"])
-        }
-    }
+tasks.withType<KotlinCompile> {
+    compilerOptions.freeCompilerArgs.add("-Xallow-kotlin-package")
 }
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+//publishing.publish(
+//    project,
+//    group.toString(),
+//    versioning.asProvider(project),
+//    PublicationComponent.JAVA
+//)

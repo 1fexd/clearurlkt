@@ -1,8 +1,10 @@
 package fe.clearurlskt
 
-import fe.uribuilder.UriParseResult
-import fe.uribuilder.UriParser
-import org.apache.hc.core5.http.message.BasicNameValuePair
+
+import fe.relocated.org.apache.hc.core5.core5.net.URIBuilder
+import fe.std.uri.ParserFailure
+import fe.std.uri.UriParseResult
+import fe.std.uri.Url
 import java.io.PrintStream
 import java.net.URL
 import java.net.URLDecoder
@@ -60,10 +62,10 @@ object ClearURL {
     }
 
     private fun applyRules(parseResult: UriParseResult, provider: Provider, debugWriter: PrintStream? = null): String? {
-        val parsedUri = parseResult as UriParseResult.ParsedUri
+        val parsedUri = parseResult as Url
 
-        val fields = parsedUri.queryParams.associateTo(LinkedHashMap<String, String>()) { it.name to it.value }
-        val fragments = parsedUri.fragments
+        val fields = parsedUri.queryParams.toMap(LinkedHashMap())
+        val fragments = parsedUri.toFragmentMap()
 
         var fieldsChanged = 0
         var fragmentsChanged = 0
@@ -102,29 +104,25 @@ object ClearURL {
 
         debugWriter?.println("\tField changes: $fieldsChanged, Fragment changes: $fragmentsChanged")
         // If no fields/fragments have been removed, set the encoded query/fragment which will be used over the decoded field/fragment map if set
-        val encodedQuery = if (fieldsChanged == 0) parseResult.encodedQuery else null
-        val encodedFragment = if (fragmentsChanged == 0) parseResult.encodedFragment else null
+//        val encodedQuery = if (fieldsChanged == 0) parseResult.encodedQuery else null
+//        val encodedFragment = if (fragmentsChanged == 0) parseResult.encodedFragment else null
 
-        val newUri = UriParseResult.ParsedUri(
-            parsedUri.scheme,
-            null,
-            parsedUri.encodedAuthority,
-            parsedUri.uri,
-            parsedUri.host,
-            parsedUri.port,
-            parsedUri.encodedUserInfo,
-            parsedUri.userInfo,
-            parsedUri.encodedPath,
-            parsedUri.pathSegments,
-            parsedUri.pathRootless,
-            encodedQuery,
-            fields.map { BasicNameValuePair(it.key, it.value) },
-            encodedFragment,
-            fragments.keyValueMapToString().takeIf { it.isNotEmpty() },
-            Charsets.UTF_8
-        )
+        val builder = URIBuilder().apply {
+            scheme = parsedUri.scheme
+//            uri = parsedUri.uri
+//            parsedUri.encodedAuthority
+//            encodedQuery = parsedUri.encodedQuery
 
-        return newUri.build().toString()
+            host = parsedUri.host
+            port = parsedUri.port
+            userInfo = parsedUri.userInfo
+            pathSegments = parsedUri.pathSegments
+            fragment = fragments.keyValueMapToString().takeIf { it.isNotEmpty() }
+
+            setParameters(fields)
+        }
+
+        return builder.build().toString()
     }
 
     fun clearUrl(url: String, providers: List<Provider>, debugWriter: PrintStream? = null): String {
@@ -145,8 +143,8 @@ object ClearURL {
 
             editUrl = applyRawRules(provider, editUrl, debugWriter)
 
-            val parseResult = UriParser.parseUri(editUrl, Charsets.UTF_8)
-            if (parseResult is UriParseResult.ParserFailure) {
+            val parseResult = Url(editUrl)
+            if (parseResult is ParserFailure) {
                 debugWriter?.println("Failed to parse $editUrl: ${parseResult.exception.message}")
                 return editUrl
             }
