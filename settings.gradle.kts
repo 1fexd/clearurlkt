@@ -69,21 +69,4 @@ if (devProperties != null && isDev && (!isCI && !isJitPack)) {
         this["uri"] = "uri"
         this["test"] = "test"
     }
-
-    devProperties["gson-ext.dir"].trySubstitute("com.gitlab.grrfe.gson-ext") {
-        this["core"] = "core"
-    }
-
-    devProperties["httpkt.dir"].trySubstitute("com.gitlab.grrfe.httpkt") {
-        this["core"] = "core"
-        this["ext-gson"] = "ext-gson"
-    }
-
-    devProperties["koin-app.dir"].trySubstitute("com.gitlab.grrfe.koin-app") {
-        this["core"] = "core"
-        this["api"] = "api"
-        this["cli-core"] = "cli:cli-core"
-        this["exposed-core"] = "exposed:exposed-core"
-        this["exposed-sqlite"] = "exposed:exposed-sqlite"
-    }
 }

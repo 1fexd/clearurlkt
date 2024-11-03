@@ -20,8 +20,6 @@ repositories {
 dependencies {
     api(Grrfe.ext.gson)
     api(Grrfe.std.uri)
-    api(Grrfe.std.test)
-
 
     testImplementation(kotlin("test"))
     testImplementation("com.willowtreeapps.assertk:assertk:_")
