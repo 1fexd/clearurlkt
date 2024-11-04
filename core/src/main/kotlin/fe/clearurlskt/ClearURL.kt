@@ -1,10 +1,10 @@
 package fe.clearurlskt
 
 
-import fe.relocated.org.apache.hc.core5.core5.net.URIBuilder
 import fe.std.uri.ParserFailure
 import fe.std.uri.UriParseResult
 import fe.std.uri.Url
+import fe.std.uri.extension.buildUrl
 import java.io.PrintStream
 import java.net.URL
 import java.net.URLDecoder
@@ -107,22 +107,17 @@ object ClearURL {
 //        val encodedQuery = if (fieldsChanged == 0) parseResult.encodedQuery else null
 //        val encodedFragment = if (fragmentsChanged == 0) parseResult.encodedFragment else null
 
-        val builder = URIBuilder().apply {
+        val url = buildUrl {
             scheme = parsedUri.scheme
-//            uri = parsedUri.uri
-//            parsedUri.encodedAuthority
-//            encodedQuery = parsedUri.encodedQuery
-
             host = parsedUri.host
             port = parsedUri.port
             userInfo = parsedUri.userInfo
             pathSegments = parsedUri.pathSegments
             fragment = fragments.keyValueMapToString().takeIf { it.isNotEmpty() }
-
             setParameters(fields)
         }
 
-        return builder.build().toString()
+        return url.toString()
     }
 
     fun clearUrl(url: String, providers: List<Provider>, debugWriter: PrintStream? = null): String {
