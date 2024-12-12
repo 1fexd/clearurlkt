@@ -138,7 +138,7 @@ object ClearURL {
 
             editUrl = applyRawRules(provider, editUrl, debugWriter)
 
-            val parseResult = Url(editUrl)
+            val parseResult = Url(editUrl, setPlusAsBlanks = true)
             if (parseResult is ParserFailure) {
                 debugWriter?.println("Failed to parse $editUrl: ${parseResult.exception.message}")
                 return editUrl

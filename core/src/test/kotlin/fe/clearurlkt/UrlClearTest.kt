@@ -169,8 +169,8 @@ class UrlClearTest {
             expected = """
                 |https://accounts.nintendo.com/connect/1.0.0/authorize?state=aGb6tyEy1VlsoOh96xsttpK2jg7FlqM0EmI5ovlSDrOEDIkSz7
                 |&redirect_uri=npfd123dc2adf715a15%3A%2F%2Fauth&client_id=d123dc2adf715a15&lang=en-US
-                |&scope=openid%2Buser%2Buser.birthday%2Buser%3AanyUsers%3Apublic%2Bmission%2BmissionStatus%2BmissionCompletion
-                |%2Bmembers%3Aauthenticate%2BuserGift%3Areceive%2BpointWallet%2BrewardStatus%2BrewardExchange%3Acreate
+                |&scope=openid%20user%20user.birthday%20user%3AanyUsers%3Apublic%20mission%20missionStatus%20missionCompletion
+                |%20members%3Aauthenticate%20userGift%3Areceive%20pointWallet%20rewardStatus%20rewardExchange%3Acreate
                 |&response_type=session_token_code&session_token_code_challenge=SPD1LQJgsnzwrjn54g3DYZZ96sEWAYmLVhEUpLDoUw7
                 |&session_token_code_challenge_method=S256""".trimMargin(lineSeparator = ""),
             input = """
