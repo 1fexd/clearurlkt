@@ -97,7 +97,9 @@ class UrlClearTest {
         ClearUrlTest(
             expected = """
                 |https://social.tchncs.de/oauth/authorize?client_id=CLIENT_LEL
-                |&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=read""".trimMargin(lineSeparator = ""),
+                |&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=read""".trimMargin(
+                lineSeparator = ""
+            ),
             input = """
                 |https://social.tchncs.de/oauth/authorize?client_id=CLIENT_LEL
                 |&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&scope=read""".trimMargin(lineSeparator = "")
@@ -125,19 +127,25 @@ class UrlClearTest {
                 |%3Dikea123%26lid%3Dyeeeet&apn=com.ingka.ikea.app
                 |&afl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet&ibi=com.ingka.ikea.app
                 |&ifl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet
-                |&ofl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet&imv=1.2.3&amv=1100""".trimMargin(lineSeparator = ""),
+                |&ofl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet&imv=1.2.3&amv=1100""".trimMargin(
+                lineSeparator = ""
+            ),
             input = """
                 |https://ingka.page.link/?link=https://order.ikea.com/at/history/%23/lookup?orderId%3Dikea123%26lid%3Dyeeeet
                 |&apn=com.ingka.ikea.app&afl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&ibi=com.ingka.ikea.app
                 |&ifl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet
-                |&ofl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&imv=1.2.3&amv=1100""".trimMargin(lineSeparator = ""),
+                |&ofl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&imv=1.2.3&amv=1100""".trimMargin(
+                lineSeparator = ""
+            ),
         ),
         ClearUrlTest(
             expected = """
                 |https://m.facebook.com/v16.0/dialog/oauth?cct_prefetching=0&client_id=cringe&cbt=lol&e2e=xd&ies=0&sdk=android-16.1.3
                 |&sso=chrome_custom_tab&nonce=jabro&scope=openid%2Cpublic_profile%2Cemail&state=Lule&code_challenge_method=S256
                 |&default_audience=friends&login_behavior=NATIVE_WITH_FALLBACK&redirect_uri=fbconnect%3A%2F%2Fn%EF%BF%BD&auth_type=rerequest
-                |&response_type=id_token%2Ctoken%2Csigned_request%2Cgraph_domain&return_scopes=true&code_challenge=facebook_sucks""".trimMargin(lineSeparator = ""),
+                |&response_type=id_token%2Ctoken%2Csigned_request%2Cgraph_domain&return_scopes=true&code_challenge=facebook_sucks""".trimMargin(
+                lineSeparator = ""
+            ),
             input = """
                 |https://m.facebook.com/v16.0/dialog/oauth?cct_prefetching=0&client_id=cringe&cbt=lol&e2e=xd&ies=0
                 |&sdk=android-16.1.3&sso=chrome_custom_tab&nonce=jabro&scope=openid%2Cpublic_profile%2Cemail
@@ -147,11 +155,15 @@ class UrlClearTest {
         ),
         ClearUrlTest(
             expected = """
-                |https://analyticsindiamag.com/iit-bombay-joins-ibm-meta-to-form-ai-alliance-challenging-openai-google-amazon-microsoft/""".trimMargin(lineSeparator = ""),
+                |https://analyticsindiamag.com/iit-bombay-joins-ibm-meta-to-form-ai-alliance-challenging-openai-google-amazon-microsoft/""".trimMargin(
+                lineSeparator = ""
+            ),
             input = """
                 |https://analyticsindiamag.com/iit-bombay-joins-ibm-meta-to-form-ai-alliance-challenging-openai-google-amazon-microsoft/
                 |?utm_source=rss&utm_medium=rss
-                |&utm_campaign=iit-bombay-joins-ibm-meta-to-form-ai-alliance-challenging-openai-google-amazon-microsoft""".trimMargin(lineSeparator = ""),
+                |&utm_campaign=iit-bombay-joins-ibm-meta-to-form-ai-alliance-challenging-openai-google-amazon-microsoft""".trimMargin(
+                lineSeparator = ""
+            ),
         ),
         ClearUrlTest(
             expected = """
@@ -166,7 +178,9 @@ class UrlClearTest {
                 |&redirect_uri=npfd123dc2adf715a15%3A%2F%2Fauth&client_id=d123dc2adf715a15&lang=en-US
                 |&scope=openid+user+user.birthday+user%3AanyUsers%3Apublic+mission+missionStatus+missionCompletion+members
                 |%3Aauthenticate+userGift%3Areceive+pointWallet+rewardStatus+rewardExchange%3Acreate&response_type=session_token_code
-                |&session_token_code_challenge=SPD1LQJgsnzwrjn54g3DYZZ96sEWAYmLVhEUpLDoUw7&session_token_code_challenge_method=S256""".trimMargin(lineSeparator = "")
+                |&session_token_code_challenge=SPD1LQJgsnzwrjn54g3DYZZ96sEWAYmLVhEUpLDoUw7&session_token_code_challenge_method=S256""".trimMargin(
+                lineSeparator = ""
+            )
         )
     )
 
