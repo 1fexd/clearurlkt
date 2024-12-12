@@ -79,8 +79,8 @@ class UrlClearTest {
             input = "https://twitter.com/DelusionPosting/status/1630991327381929987?t=AP1I12BA7jOlee95KLpgqX&s=19"
         ),
         ClearUrlTest(
-            expected = "https://open.spotify.com/playlist/fuck_you_spotify?pt=trash_app",
-            input = "https://open.spotify.com/playlist/fuck_you_spotify?si=lol&pt=trash_app"
+            expected = "https://open.spotify.com/playlist/spottifei?pt=trash_app",
+            input = "https://open.spotify.com/playlist/spottifei?si=lol&pt=trash_app"
         ),
         ClearUrlTest(
             expected = "https://www.google.com/search?q=%E4%B8%AD%E6%96%87",
@@ -122,15 +122,15 @@ class UrlClearTest {
         ClearUrlTest(
             expected = """
                 |https://ingka.page.link/?link=https%3A%2F%2Forder.ikea.com%2Fat%2Fhistory%2F%23%2Flookup%3ForderId
-                |%3Dfuck_you_ikea%26lid%3Dyeeeet&apn=com.ingka.ikea.app
+                |%3Dikea123%26lid%3Dyeeeet&apn=com.ingka.ikea.app
                 |&afl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet&ibi=com.ingka.ikea.app
                 |&ifl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet
-                |&ofl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet&imv=14.88.69&amv=8869""".trimMargin(lineSeparator = ""),
+                |&ofl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet&imv=1.2.3&amv=1100""".trimMargin(lineSeparator = ""),
             input = """
-                |https://ingka.page.link/?link=https://order.ikea.com/at/history/%23/lookup?orderId%3Dfuck_you_ikea%26lid%3Dyeeeet
+                |https://ingka.page.link/?link=https://order.ikea.com/at/history/%23/lookup?orderId%3Dikea123%26lid%3Dyeeeet
                 |&apn=com.ingka.ikea.app&afl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&ibi=com.ingka.ikea.app
                 |&ifl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet
-                |&ofl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&imv=14.88.69&amv=8869""".trimMargin(lineSeparator = ""),
+                |&ofl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&imv=1.2.3&amv=1100""".trimMargin(lineSeparator = ""),
         ),
         ClearUrlTest(
             expected = """
