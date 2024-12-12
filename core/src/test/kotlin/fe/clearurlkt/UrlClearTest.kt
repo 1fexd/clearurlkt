@@ -172,6 +172,28 @@ class UrlClearTest {
 
     private val providers = ClearURLLoader.loadBuiltInClearURLProviders()
 
+    private fun runTest(input: String): String {
+        return clearUrl(input, providers)
+    }
+
+    @Test
+    fun `blank encoding`() {
+        val tests = listOf(
+            ClearUrlTest(
+                expected = "https://www.google.com/search?q=never%20gonna%20give%20you%20up",
+                input = "https://www.google.com/search?q=never%20gonna%20give%20you%20up"
+            ),
+            ClearUrlTest(
+                expected = "https://www.google.com/search?q=never%20gonna%20give%20you%20up",
+                input = "https://www.google.com/search?q=never+gonna+give+you+up"
+            )
+        )
+
+        assertEach(tests) { (expected, input) ->
+            assertThat(runTest(input)).isEqualTo(expected)
+        }
+    }
+
     @Test
     fun test() {
         assertEach(tests) { (expected, input) ->
