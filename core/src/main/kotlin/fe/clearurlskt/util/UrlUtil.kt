@@ -1,4 +1,4 @@
-package fe.clearurlskt
+package fe.clearurlskt.util
 
 import fe.std.uri.Url
 

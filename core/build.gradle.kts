@@ -1,6 +1,7 @@
 import fe.buildsrc.MetadataGeneratorTask
 import fe.buildsrc.UpdateRulesTask
 import fe.buildsrc.dependency.Grrfe
+import fe.buildsrc.dependency._1fexd
 import fe.buildsrc.publishing.PublicationComponent
 import fe.buildsrc.publishing.asProvider
 import fe.buildsrc.publishing.publish
@@ -22,7 +23,9 @@ repositories {
 
 dependencies {
     api(Grrfe.ext.gson)
+    api(Grrfe.std.result.core)
     api(Grrfe.std.uri)
+    api(_1fexd.signify)
 
     testImplementation(kotlin("test"))
     testImplementation("com.willowtreeapps.assertk:assertk:_")
@@ -44,7 +47,7 @@ val assemble by tasks
 assemble.dependsOn(generateMetadata)
 
 val updateRules = tasks.register<UpdateRulesTask>("updateRules") {
-    file = "src/main/resources/clearurls.json"
+    file = "src/main/resources/fe/clearurlskt/clearurls.json"
 }
 
 kotlin {
