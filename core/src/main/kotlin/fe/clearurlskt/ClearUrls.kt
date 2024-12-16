@@ -53,7 +53,6 @@ class ClearUrls(
             if (preReplaceUrl == mutUrl) continue
             yield(RawRule(provider.key, preReplaceUrl, mutUrl, regex))
         }
-
         return mutUrl
     }
 

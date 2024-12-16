@@ -8,6 +8,7 @@ import fe.clearurlskt.provider.ProviderSerializer
 import fe.signify.PublicKey
 import fe.signify.Signature
 import java.io.InputStream
+import java.net.URL
 
 interface ClearURLConfigLoader {
     fun load(): Result<List<Provider>?>
@@ -16,10 +17,20 @@ interface ClearURLConfigLoader {
 object BundledClearURLConfigLoader : ClearURLConfigLoader {
     private const val file = "clearurls.json"
     private val bundledClass = Resource::class.java
+    private val bundledClassPackage by lazy {
+        bundledClass.`package`.name.replace(".", "/")
+    }
 
     private val url by lazy {
         bundledClass.getResource(file)
-            ?: ClassLoader.getSystemResource("${bundledClass.`package`.name.replace(".", "/")}/$file")
+            ?: getSystemResource(bundledClassPackage)
+            ?: getSystemResource("fe/clearurlskt")
+            ?: getSystemResource()
+    }
+
+    fun getSystemResource(path: String? = null): URL? {
+        val filePath = path?.let { "$it/$file" } ?: file
+        return ClassLoader.getSystemResource(filePath)
     }
 
     override fun load(): Result<List<Provider>?> {
