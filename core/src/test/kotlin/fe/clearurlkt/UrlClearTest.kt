@@ -6,13 +6,13 @@ import assertk.assertions.isEqualTo
 import assertk.tableOf
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
-import fe.std.assert.trimMargin
+import fe.std.test.trimMargin
 import kotlin.test.Test
 
 internal class UrlClearTest {
 
     private fun String.trimTestMargin(): String {
-        return trimMargin("")
+        return trimMargin(lineSeparator = "")
     }
 
     private val tests = tableOf("input", "expected")
@@ -154,7 +154,7 @@ internal class UrlClearTest {
     private val clearUrl = ClearUrls(providers)
 
     private fun runTest(input: String): String {
-        val (result, operations) =  clearUrl.clearUrl(input)
+        val (result, operations) = clearUrl.clearUrl(input)
 
         println("ClearUrl($input): $result")
         for (operation in operations) {

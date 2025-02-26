@@ -1,17 +1,17 @@
 import fe.buildsrc.MetadataGeneratorTask
 import fe.buildsrc.UpdateRulesTask
-import fe.buildsrc.dependency.Grrfe
-import fe.buildsrc.dependency._1fexd
-import fe.buildsrc.publishing.PublicationComponent
-import fe.buildsrc.publishing.asProvider
-import fe.buildsrc.publishing.publish
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import fe.build.dependencies.Grrfe
+import fe.build.dependencies._1fexd
+import fe.buildlogic.extension.CompilerOption
+import fe.buildlogic.extension.addCompilerOptions
+import fe.buildlogic.publishing.PublicationComponent
+import fe.buildlogic.publishing.publish
 
 plugins {
-    java
     kotlin("jvm")
-    id("net.nemerosa.versioning")
     `maven-publish`
+    id("net.nemerosa.versioning")
+    id("com.gitlab.grrfe.build-logic-plugin")
 }
 
 group = "fe.clearurlkt"
@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    api(Grrfe.ext.gson)
+    api(Grrfe.gsonExt.core)
     api(Grrfe.std.result.core)
     api(Grrfe.std.uri)
     api(_1fexd.signify)
@@ -51,11 +51,8 @@ val updateRules = tasks.register<UpdateRulesTask>("updateRules") {
 }
 
 kotlin {
-    jvmToolchain(17)
-}
-
-tasks.withType<KotlinCompile> {
-    compilerOptions.freeCompilerArgs.add("-Xallow-kotlin-package")
+    jvmToolchain(21)
+    addCompilerOptions(CompilerOption.AllowKotlinPackage)
 }
 
 java {
@@ -64,8 +61,6 @@ java {
 }
 
 publishing.publish(
-    project,
-    group.toString(),
-    versioning.asProvider(project),
-    PublicationComponent.JAVA
+    project = project,
+    component = PublicationComponent.Java
 )
