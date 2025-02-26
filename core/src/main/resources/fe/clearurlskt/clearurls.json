@@ -37,7 +37,10 @@
                 "s",
                 "content-id",
                 "dib",
-                "dib_tag"
+                "dib_tag",
+                "social_share",
+                "starsLeft",
+                "skipTwisterOG"
             ],
             "referralMarketing": [
                 "tag",
@@ -157,7 +160,10 @@
                 "rlz",
                 "i-would-rather-use-firefox",
                 "pcampaignid",
-                "sca_esv"
+                "sca_(?:esv|upv)",
+                "iflsig",
+                "fbs",
+                "ictx"
             ],
             "referralMarketing": [
                 "referrer"
@@ -182,19 +188,6 @@
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/amp\\/s\\/([^&]+)"
             ],
             "forceRedirection": true
-        },
-        "googleSearch": {
-            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/search\\?",
-            "completeProvider": false,
-            "rules": [
-                "client",
-                "sclient"
-            ],
-            "referralMarketing": [],
-            "rawRules": [],
-            "exceptions": [],
-            "redirections": [],
-            "forceRedirection": false
         },
         "googlesyndication": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?googlesyndication\\.com",
@@ -246,6 +239,7 @@
                 "(?:%3F)?mkt_tok",
                 "(?:%3F)?hmb_(?:campaign|medium|source)",
                 "(?:%3F)?gclid",
+                "(?:%3F)?srsltid",
                 "(?:%3F)?otm_[a-z_]*",
                 "(?:%3F)?cmpid",
                 "(?:%3F)?os_ehash",
@@ -329,7 +323,8 @@
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?github\\.com",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?billiger\\.de\\/.*?mc=",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?\\.youtrack\\.cloud",
-                "^https?:\\/\\/cu\\.bankid\\.com"
+                "^https?:\\/\\/cu\\.bankid\\.com",
+                "^https?:\\/\\/login\\.aliexpress\\.us"
             ],
             "redirections": [],
             "forceRedirection": false
@@ -395,7 +390,8 @@
                 "feature",
                 "gclid",
                 "kw" ,
-                "si"
+                "si",
+                "pp"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -524,7 +520,8 @@
                 "\\$3p",
                 "%24original_url",
                 "\\$original_url",
-                "_branch_match_id"
+                "_branch_match_id",
+                "share_id"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -1306,6 +1303,18 @@
             "redirections": [],
             "forceRedirection": false
         },
+        "80000hours.org": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?80000hours\\.org",
+            "completeProvider": false,
+            "rules": [
+                "int_campaign"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
         "spotify.com": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?spotify\\.com",
             "completeProvider": false,
@@ -1409,7 +1418,6 @@
             "urlPattern": "^https?:\\/\\/(?:accounts\\.)?firefox\\.com",
             "completeProvider": false,
             "rules": [
-                "context",
                 "entrypoint",
                 "form_type"
             ],
@@ -1924,11 +1932,40 @@
                 "u_code",
                 "preview_pb",
                 "_d",
+                "_t",
+                "_r",
                 "timestamp",
                 "user_id",
                 "share_app_name",
                 "share_iid",
                 "source"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "xiaohongshu.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?xiaohongshu\\.com",
+            "completeProvider": false,
+            "rules": [
+                "xhsshare",
+                "author_share",
+                "type",
+                "xsec_source",
+                "share_from_user_hidden",
+                "app_version",
+                "ignoreEngage",
+                "app_platform",
+                "apptime",
+                "appuid",
+                "shareRedId",
+                "share_id",
+                "exSource",
+                "verifyUuid",
+                "verifyType",
+                "verifyBiz"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -2986,7 +3023,7 @@
             "redirections": [],
             "forceRedirection": false
         },
-        "shopee": { 
+        "shopee": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?shopee\\.(com|co\\.th)",
             "completeProvider": false,
             "rules": [
@@ -3000,7 +3037,7 @@
             "redirections": [],
             "forceRedirection": false
         },
-        "lazada": { 
+        "lazada": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?lazada\\.(com|co\\.th|co\\.id|com\\.my|com\\.ph|sg|vn)",
             "completeProvider": false,
             "rules": [
@@ -3026,13 +3063,38 @@
             "redirections": [],
             "forceRedirection": false
         },
-        "pantip.com": { 
+        "pantip.com": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?pantip\\.com",
             "completeProvider": false,
             "rules": [],
             "rawRules": [
                 "#lead.*"
             ],
+            "referralMarketing": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "skimresources.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?skimresources\\.com",
+            "completeProvider": false,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [
+                "^https?:\\/\\/go\\.skimresources\\.com\\/.*?url=([^&]+)"
+            ],
+            "forceRedirection": false
+        },
+        "office-partner.de": { 
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?office-partner\\.de",
+            "completeProvider": false,
+            "rules": [
+                "sPartner",
+                "campaign"
+            ],
+            "rawRules": [],
             "referralMarketing": [],
             "exceptions": [],
             "redirections": [],
