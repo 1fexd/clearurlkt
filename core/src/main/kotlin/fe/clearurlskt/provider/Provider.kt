@@ -1,6 +1,6 @@
 package fe.clearurlskt.provider
 
-data class Provider(
+public data class Provider(
     val sortPosition: Int,
     val key: String,
     val url: Regex,

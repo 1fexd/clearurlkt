@@ -2,7 +2,7 @@ package fe.clearurlskt.util
 
 import fe.std.uri.Url
 
-fun Url.toFragmentMap(): MutableMap<String, String?> {
+public fun Url.toFragmentMap(): MutableMap<String, String?> {
     return fragment
         ?.split("&")
         ?.map { it.split("=") }
@@ -10,7 +10,7 @@ fun Url.toFragmentMap(): MutableMap<String, String?> {
         ?: mutableMapOf()
 }
 
-fun Map<String, String?>.keyValueMapToString(): String {
+public fun Map<String, String?>.keyValueMapToString(): String {
     return map { (key, value) ->
         if (value != null) "$key=$value"
         else key

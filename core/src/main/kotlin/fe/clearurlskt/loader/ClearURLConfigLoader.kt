@@ -10,11 +10,11 @@ import fe.signify.Signature
 import java.io.InputStream
 import java.net.URL
 
-interface ClearURLConfigLoader {
-    fun load(): Result<List<Provider>?>
+public interface ClearURLConfigLoader {
+    public fun load(): Result<List<Provider>?>
 }
 
-object BundledClearURLConfigLoader : ClearURLConfigLoader {
+public object BundledClearURLConfigLoader : ClearURLConfigLoader {
     private const val file = "clearurls.json"
     private val bundledClass = Resource::class.java
     private val bundledClassPackage by lazy {
@@ -28,7 +28,7 @@ object BundledClearURLConfigLoader : ClearURLConfigLoader {
             ?: getSystemResource()
     }
 
-    fun getSystemResource(path: String? = null): URL? {
+    public fun getSystemResource(path: String? = null): URL? {
         val filePath = path?.let { "$it/$file" } ?: file
         return ClassLoader.getSystemResource(filePath)
     }
@@ -40,7 +40,7 @@ object BundledClearURLConfigLoader : ClearURLConfigLoader {
     }
 }
 
-class StreamClearURLConfigLoader(private val stream: InputStream) : ClearURLConfigLoader {
+public class StreamClearURLConfigLoader(private val stream: InputStream) : ClearURLConfigLoader {
     override fun load(): Result<List<Provider>?> {
         return runCatching {
             ProviderSerializer.handle(stream)
@@ -48,11 +48,11 @@ class StreamClearURLConfigLoader(private val stream: InputStream) : ClearURLConf
     }
 }
 
-object RemoteLoader {
-    val gson: Gson = GsonBuilder().create()
-    val publicKey = PublicKey.fromString("RWQazSQ29JJBtHn/Vze0iWHWGlkMUlKFQLOt2EdbTo4ToTx40uV8r8N/")
+public object RemoteLoader {
+    public val gson: Gson = GsonBuilder().create()
+    public val publicKey: PublicKey = PublicKey.fromString("RWQazSQ29JJBtHn/Vze0iWHWGlkMUlKFQLOt2EdbTo4ToTx40uV8r8N/")
 
-    inline fun <reified T> parseIfValid(fileStream: InputStream, signatureStream: InputStream): T? {
+    public inline fun <reified T> parseIfValid(fileStream: InputStream, signatureStream: InputStream): T? {
         val fileContent = fileStream.bufferedReader().readText()
 
         val signatureContent = signatureStream.bufferedReader().readLines()

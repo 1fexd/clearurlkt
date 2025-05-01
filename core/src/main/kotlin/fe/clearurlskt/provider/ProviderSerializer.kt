@@ -10,7 +10,7 @@ import fe.gson.extension.json.`object`.asObjectOrNull
 import fe.gson.extension.json.`object`.asString
 import java.io.InputStream
 
-object ProviderSerializer {
+public object ProviderSerializer {
     private fun String.toIgnoreCaseRegex(exactly: Boolean = false): Regex {
         val str = if (exactly) "^$this$" else this
         return Regex(str, RegexOption.IGNORE_CASE)
@@ -44,7 +44,7 @@ object ProviderSerializer {
             .sortedBy { it.sortPosition }
     }
 
-    fun handle(stream: InputStream): List<Provider>? {
+    public fun handle(stream: InputStream): List<Provider>? {
         return stream
             .parseJsonOrNull<JsonObject>()
             ?.asObjectOrNull("providers")

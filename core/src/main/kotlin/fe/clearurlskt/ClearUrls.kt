@@ -11,7 +11,7 @@ import fe.std.uri.Url
 import fe.std.uri.UrlFactory
 import fe.std.uri.extension.buildUrl
 
-class ClearUrls(
+public class ClearUrls(
     private val providers: List<Provider>,
 ) {
     private suspend fun SequenceScope<ClearUrlOperation>.isException(provider: Provider, editUrl: String): Boolean {
@@ -129,7 +129,7 @@ class ClearUrls(
         return mutUrl
     }
 
-    fun clearUrl(url: String): Pair<String, List<ClearUrlOperation>> {
+    public fun clearUrl(url: String): Pair<String, List<ClearUrlOperation>> {
         var result = url
         val operations = sequence<ClearUrlOperation> { result = clearUrl(url) }.toList()
         return result to operations

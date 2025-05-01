@@ -1,4 +1,4 @@
 package fe.clearurlskt
 
-object Resource {
+public object Resource {
 }

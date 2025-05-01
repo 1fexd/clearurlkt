@@ -3,31 +3,35 @@ package fe.clearurlskt
 import fe.std.result.Failure
 import fe.std.uri.Url
 
-sealed interface ClearUrlOperation
+public sealed interface ClearUrlOperation
 
-sealed class Modification(val provider: String, val input: String, val result: String) : ClearUrlOperation {
-    class ParameterRemoval(
+public sealed class Modification(
+    public val provider: String,
+    public val input: String,
+    public val result: String
+) : ClearUrlOperation {
+    public class ParameterRemoval(
         provider: String,
         input: String,
         result: String,
-        val fields: MutableSet<String>,
-        val fragment: MutableSet<String>,
+        public val fields: MutableSet<String>,
+        public val fragment: MutableSet<String>,
     ) : Modification(provider, input, result)
 
-    class RawRule(
+    public class RawRule(
         provider: String,
         input: String,
         result: String,
-        val regex: Regex,
+        public val regex: Regex,
     ) : Modification(provider, input, result)
 
-    class Redirection(
+    public class Redirection(
         provider: String,
         input: String,
         result: String,
-        val regex: Regex,
+        public val regex: Regex,
     ) : Modification(provider, input, result)
 }
 
-data class Exception(val provider: String, val url: String, val regex: Regex) : ClearUrlOperation
-data class ParseFailure(val provider: String, val url: String, val parseResult: Failure<Url>) : ClearUrlOperation
+public data class Exception(val provider: String, val url: String, val regex: Regex) : ClearUrlOperation
+public data class ParseFailure(val provider: String, val url: String, val parseResult: Failure<Url>) : ClearUrlOperation
