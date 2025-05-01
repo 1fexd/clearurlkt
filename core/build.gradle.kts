@@ -1,28 +1,17 @@
-import fe.buildsrc.MetadataGeneratorTask
-import fe.buildsrc.UpdateRulesTask
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.extension.CompilerOption
-import fe.buildlogic.extension.addCompilerOptions
-import fe.buildlogic.publishing.PublicationComponent
-import fe.buildlogic.publishing.publish
+import fe.buildsrc.MetadataGeneratorTask
+import fe.buildsrc.UpdateRulesTask
 
 plugins {
-    kotlin("jvm")
-    `maven-publish`
-    id("net.nemerosa.versioning")
-    id("com.gitlab.grrfe.build-logic-plugin")
-}
-
-group = "fe.clearurlkt"
-
-repositories {
-    mavenCentral()
-    maven(url = "https://jitpack.io")
 }
 
 dependencies {
+    api("com.google.code.gson:gson:2.11.0")
+    api(platform(Grrfe.gsonExt.bom))
     api(Grrfe.gsonExt.core)
+
+    api(platform(Grrfe.std.bom))
     api(Grrfe.std.result.core)
     api(Grrfe.std.uri)
     api(_1fexd.signify)
@@ -49,18 +38,3 @@ assemble.dependsOn(generateMetadata)
 val updateRules = tasks.register<UpdateRulesTask>("updateRules") {
     file = "src/main/resources/fe/clearurlskt/clearurls.json"
 }
-
-kotlin {
-    jvmToolchain(21)
-    addCompilerOptions(CompilerOption.AllowKotlinPackage)
-}
-
-java {
-    withJavadocJar()
-    withSourcesJar()
-}
-
-publishing.publish(
-    project = project,
-    component = PublicationComponent.Java
-)
