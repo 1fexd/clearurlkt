@@ -15,21 +15,21 @@ public interface ClearURLConfigLoader {
 }
 
 public object BundledClearURLConfigLoader : ClearURLConfigLoader {
-    private const val file = "clearurls.json"
+    private const val FILE = "clearurls.json"
     private val bundledClass = Resource::class.java
     private val bundledClassPackage by lazy {
         bundledClass.`package`.name.replace(".", "/")
     }
 
     private val url by lazy {
-        bundledClass.getResource(file)
+        bundledClass.getResource(FILE)
             ?: getSystemResource(bundledClassPackage)
             ?: getSystemResource("fe/clearurlskt")
             ?: getSystemResource()
     }
 
     public fun getSystemResource(path: String? = null): URL? {
-        val filePath = path?.let { "$it/$file" } ?: file
+        val filePath = path?.let { "$it/$FILE" } ?: FILE
         return ClassLoader.getSystemResource(filePath)
     }
 
