@@ -5,8 +5,9 @@ import com.google.gson.GsonBuilder
 import fe.clearurlskt.Resource
 import fe.clearurlskt.provider.Provider
 import fe.clearurlskt.provider.ProviderSerializer
-import fe.signify.PublicKey
-import fe.signify.Signature
+import fe.signify.Ed25519
+import fe.signify.Ed25519PublicKey
+import fe.signify.Type
 import java.io.InputStream
 import java.net.URL
 
@@ -50,14 +51,14 @@ public class StreamClearURLConfigLoader(private val stream: InputStream) : Clear
 
 public object RemoteLoader {
     public val gson: Gson = GsonBuilder().create()
-    public val publicKey: PublicKey = PublicKey.fromString("RWQazSQ29JJBtHn/Vze0iWHWGlkMUlKFQLOt2EdbTo4ToTx40uV8r8N/")
+    public val publicKey: Ed25519PublicKey = Ed25519.fromBase64String(Type.PublicKey,"RWQazSQ29JJBtHn/Vze0iWHWGlkMUlKFQLOt2EdbTo4ToTx40uV8r8N/").getOrNull()!!
 
     public inline fun <reified T> parseIfValid(fileStream: InputStream, signatureStream: InputStream): T? {
         val fileContent = fileStream.bufferedReader().readText()
 
         val signatureContent = signatureStream.bufferedReader().readLines()
         // TODO: Catch
-        val signature = Signature.fromString(signatureContent.singleOrNull() ?: signatureContent[1])
+        val signature = Ed25519.fromBase64String(Type.Signature,signatureContent.singleOrNull() ?: signatureContent[1]).getOrNull()!!
 
         return runCatching {
             publicKey.verify(signature, fileContent.toByteArray())

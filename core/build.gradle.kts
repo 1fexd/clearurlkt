@@ -1,5 +1,4 @@
 import fe.build.dependencies.Grrfe
-import fe.build.dependencies._1fexd
 import fe.buildsrc.MetadataGeneratorTask
 import fe.buildsrc.UpdateRulesTask
 
@@ -14,7 +13,7 @@ dependencies {
     api(platform(Grrfe.std.bom))
     api(Grrfe.std.result.core)
     api(Grrfe.std.uri)
-    api(_1fexd.signify)
+    api(Grrfe.signify)
 
     testImplementation(kotlin("test"))
     testImplementation("com.willowtreeapps.assertk:assertk:_")
