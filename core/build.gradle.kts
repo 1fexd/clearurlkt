@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-    api("com.google.code.gson:gson:2.11.0")
+    api("com.google.code.gson:gson:_")
     api(platform(Grrfe.gsonExt.bom))
     api(Grrfe.gsonExt.core)
 
