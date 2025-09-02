@@ -26,7 +26,7 @@ internal class UrlClearTest {
         .row("https://myaccount.google.com/?utm_source=google", "https://myaccount.google.com/?utm_source=google")
         .row("http://example.com/?&&&&", "http://example.com/?&&&&")
         .row("http://example.com/?p1=&p2=", "http://example.com/?p1=&p2=")
-        .row("http://example.com/?p1=value&p1=othervalue", "http://example.com/?p1=othervalue")
+        .row("http://example.com/?p1=value&p1=othervalue", "http://example.com/?p1=value&p1=othervalue")
         .row("https://example.com/##", "https://example.com/#%23")
         .row("https://example.com/??", "https://example.com/?%3F")
         .row("https://example.com/#xxxxxxxxxx#", "https://example.com/#xxxxxxxxxx%23")
@@ -147,6 +147,18 @@ internal class UrlClearTest {
             |&response_type=session_token_code&session_token_code_challenge=SPD1LQJgsnzwrjn54g3DYZZ96sEWAYmLVhEUpLDoUw7
             |&session_token_code_challenge_method=S256
             |""".trimTestMargin(),
+        )
+        .row(
+            """
+            |https://store.epicgames.com/purchase
+            |?offers=1-e52b4d8cbcfd45ad95eff800ccc59d93-54003c89a604467abe315658a4a853b3
+            |&offers=1-99d8ac4b0cd94611b52bae792d84b0e4-5e416c7c1444483e828899b0c30ce2cd
+            |""".trimTestMargin(),
+            """
+            |https://store.epicgames.com/purchase
+            |?offers=1-e52b4d8cbcfd45ad95eff800ccc59d93-54003c89a604467abe315658a4a853b3
+            |&offers=1-99d8ac4b0cd94611b52bae792d84b0e4-5e416c7c1444483e828899b0c30ce2cd
+            |""".trimTestMargin()
         )
 
 

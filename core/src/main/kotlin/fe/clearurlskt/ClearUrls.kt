@@ -27,8 +27,7 @@ public class ClearUrls(
 
     private suspend fun SequenceScope<ClearUrlOperation>.handleRedirections(provider: Provider, url: String): String? {
         for (regex in provider.redirections) {
-            val result = regex.find(url)
-            if (result == null) continue
+            val result = regex.find(url) ?: continue
 
             val (_, redirect) = result.groupValues
 
@@ -56,6 +55,20 @@ public class ClearUrls(
         return mutUrl
     }
 
+    private fun MutableList<Pair<String, String?>>.removeIfKey(predicate: (String) -> Boolean): MutableSet<String> {
+        val removeKeys = mutableSetOf<String>()
+        for (pair in this) {
+            if (!predicate(pair.first)) continue
+            removeKeys.add(pair.first)
+        }
+
+        for (key in removeKeys) {
+            removeIf { key == it.first }
+        }
+
+        return removeKeys
+    }
+
     private fun <K, V> MutableMap<K, V>.removeIfKey(predicate: (K) -> Boolean): MutableSet<K> {
         val removeKeys = mutableSetOf<K>()
         for (key in keys) {
@@ -71,7 +84,7 @@ public class ClearUrls(
     }
 
     private suspend fun SequenceScope<ClearUrlOperation>.applyRules(provider: Provider, url: Url): String? {
-        val fields = url.queryParams.toMap(LinkedHashMap())
+        val fields = url.queryParams.toMutableList()
         val fragments = url.toFragmentMap()
 
         val fieldChanges = mutableSetOf<String>()
