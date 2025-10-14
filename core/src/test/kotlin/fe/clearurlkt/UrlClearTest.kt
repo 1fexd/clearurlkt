@@ -28,7 +28,7 @@ internal class UrlClearTest {
         .row("http://example.com/?p1=&p2=", "http://example.com/?p1=&p2=")
         .row("http://example.com/?p1=value&p1=othervalue", "http://example.com/?p1=value&p1=othervalue")
         .row("https://example.com/##", "https://example.com/#%23")
-        .row("https://example.com/??", "https://example.com/?%3F")
+        .row("https://example.com/??", "https://example.com/??")
         .row("https://example.com/#xxxxxxxxxx#", "https://example.com/#xxxxxxxxxx%23")
         .row("https://l.instagram.com/?u=https://linksheet.app/&e=tracking-token", "https://linksheet.app/")
         .row("https://l.instagram.com/?u=linksheet.app/&e=tracking-token", "https://linksheet.app/")
@@ -71,9 +71,9 @@ internal class UrlClearTest {
             |""".trimTestMargin(),
             """
             |https://m.facebook.com/v16.0/dialog/oauth?cct_prefetching=0&client_id=cringe&cbt=lol&e2e=xd&ies=0&sdk=android-16.1.3
-            |&sso=chrome_custom_tab&nonce=jabro&scope=openid%2Cpublic_profile%2Cemail&state=Lule&code_challenge_method=S256
-            |&default_audience=friends&login_behavior=NATIVE_WITH_FALLBACK&redirect_uri=fbconnect%3A%2F%2Fn%EF%BF%BD&auth_type=rerequest
-            |&response_type=id_token%2Ctoken%2Csigned_request%2Cgraph_domain&return_scopes=true&code_challenge=facebook_sucks
+            |&sso=chrome_custom_tab&nonce=jabro&scope=openid,public_profile,email&state=Lule&code_challenge_method=S256
+            |&default_audience=friends&login_behavior=NATIVE_WITH_FALLBACK&redirect_uri=fbconnect://n%EF%BF%BD&auth_type=rerequest
+            |&response_type=id_token,token,signed_request,graph_domain&return_scopes=true&code_challenge=facebook_sucks
             |""".trimTestMargin()
         )
         .row(
@@ -92,7 +92,7 @@ internal class UrlClearTest {
             |""".trimTestMargin(),
             """
             |https://social.tchncs.de/oauth/authorize?client_id=CLIENT_LEL
-            |&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=read
+            |&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&scope=read
             |""".trimTestMargin(),
         )
         .row(
@@ -114,11 +114,10 @@ internal class UrlClearTest {
             |&ofl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&imv=1.2.3&amv=1100
             |""".trimTestMargin(),
             """
-            |https://ingka.page.link/?link=https%3A%2F%2Forder.ikea.com%2Fat%2Fhistory%2F%23%2Flookup%3ForderId
-            |%3Dikea123%26lid%3Dyeeeet&apn=com.ingka.ikea.app
-            |&afl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet&ibi=com.ingka.ikea.app
-            |&ifl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet
-            |&ofl=https%3A%2F%2Forder.ikea.com%2Fat%2Fde%2Fpurchases%2Fikea_sucks%2F%3Flid%3Dyeeeet&imv=1.2.3&amv=1100
+            |https://ingka.page.link/?link=https://order.ikea.com/at/history/%23/lookup?orderId=ikea123&lid=yeeeet
+            |&apn=com.ingka.ikea.app&afl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&ibi=com.ingka.ikea.app
+            |&ifl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet
+            |&ofl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&imv=1.2.3&amv=1100
             |""".trimTestMargin(),
         )
         .row(
@@ -141,9 +140,9 @@ internal class UrlClearTest {
             |""".trimTestMargin(),
             """
             |https://accounts.nintendo.com/connect/1.0.0/authorize?state=aGb6tyEy1VlsoOh96xsttpK2jg7FlqM0EmI5ovlSDrOEDIkSz7
-            |&redirect_uri=npfd123dc2adf715a15%3A%2F%2Fauth&client_id=d123dc2adf715a15&lang=en-US
-            |&scope=openid%20user%20user.birthday%20user%3AanyUsers%3Apublic%20mission%20missionStatus%20missionCompletion
-            |%20members%3Aauthenticate%20userGift%3Areceive%20pointWallet%20rewardStatus%20rewardExchange%3Acreate
+            |&redirect_uri=npfd123dc2adf715a15://auth&client_id=d123dc2adf715a15&lang=en-US
+            |&scope=openid%20user%20user.birthday%20user:anyUsers:public%20mission%20missionStatus%20missionCompletion
+            |%20members:authenticate%20userGift:receive%20pointWallet%20rewardStatus%20rewardExchange:create
             |&response_type=session_token_code&session_token_code_challenge=SPD1LQJgsnzwrjn54g3DYZZ96sEWAYmLVhEUpLDoUw7
             |&session_token_code_challenge_method=S256
             |""".trimTestMargin(),
@@ -158,6 +157,14 @@ internal class UrlClearTest {
             |https://store.epicgames.com/purchase
             |?offers=1-e52b4d8cbcfd45ad95eff800ccc59d93-54003c89a604467abe315658a4a853b3
             |&offers=1-99d8ac4b0cd94611b52bae792d84b0e4-5e416c7c1444483e828899b0c30ce2cd
+            |""".trimTestMargin()
+        )
+        .row(
+            """https://cryptpad.fr/doc/
+            |#/2/doc/view/JHBAaIWBxeAJxjCkRsfc9teDgekmZRTy3NpYr5jIioM/embed/
+            |""".trimTestMargin(),
+            """https://cryptpad.fr/doc/
+            |#/2/doc/view/JHBAaIWBxeAJxjCkRsfc9teDgekmZRTy3NpYr5jIioM/embed/
             |""".trimTestMargin()
         )
 

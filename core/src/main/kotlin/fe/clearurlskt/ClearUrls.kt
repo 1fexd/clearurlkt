@@ -7,8 +7,9 @@ import fe.clearurlskt.util.keyValueMapToString
 import fe.clearurlskt.util.toFragmentMap
 import fe.relocated.org.apache.hc.core5.core5.net.PercentCodec
 import fe.std.result.isFailure
-import fe.std.uri.Url
-import fe.std.uri.UrlFactory
+import fe.std.uri.EncodingPolicy
+import fe.std.uri.StdUrl
+import fe.std.uri.StdUrlFactory
 import fe.std.uri.extension.buildUrl
 
 public class ClearUrls(
@@ -33,7 +34,7 @@ public class ClearUrls(
 
             val resultUrl = PercentCodec.decode(redirect, Charsets.UTF_8)
             if (!resultUrl.contains("://")) {
-                return UrlFactory.fixHttpUrl(resultUrl)
+                return StdUrlFactory.fixHttpUrl(resultUrl)
             }
 
             yield(Redirection(provider.key, url, resultUrl, regex))
@@ -83,7 +84,7 @@ public class ClearUrls(
         return removeKeys
     }
 
-    private suspend fun SequenceScope<ClearUrlOperation>.applyRules(provider: Provider, url: Url): String? {
+    private suspend fun SequenceScope<ClearUrlOperation>.applyRules(provider: Provider, url: StdUrl): String? {
         val fields = url.queryParams.toMutableList()
         val fragments = url.toFragmentMap()
 
@@ -98,7 +99,7 @@ public class ClearUrls(
         }
 
         val inputUrl = url.toString()
-        val url = buildUrl {
+        val url = buildUrl(encodingPolicy = EncodingPolicy.RFC_3986) {
             scheme = url.scheme
             host = url.host
             port = url.port
@@ -130,7 +131,7 @@ public class ClearUrls(
 
             mutUrl = applyRawRules(provider, mutUrl)
 
-            val parseResult = UrlFactory.parse(mutUrl, setPlusAsBlanks = true)
+            val parseResult = StdUrlFactory.parse(mutUrl, encodingPolicy = EncodingPolicy.RFC_3986, setPlusAsBlanks = true)
             if (parseResult.isFailure()) {
                 yield(ParseFailure(provider.key, mutUrl, parseResult))
                 return mutUrl
