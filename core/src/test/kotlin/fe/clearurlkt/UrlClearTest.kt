@@ -108,16 +108,16 @@ internal class UrlClearTest {
         )
         .row(
             """
-            |https://ingka.page.link/?link=https://order.ikea.com/at/history/%23/lookup?orderId%3Dikea123%26lid%3Dyeeeet
-            |&apn=com.ingka.ikea.app&afl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&ibi=com.ingka.ikea.app
-            |&ifl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet
-            |&ofl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&imv=1.2.3&amv=1100
+            |https://ingka.page.link/?link=https://order.ikea.com/at/history/%23/lookup?orderId%3Dikea123%26lid%3Dhello
+            |&apn=com.ingka.ikea.app&afl=https://order.ikea.com/at/de/purchases/ikea_ikea/?lid=hello&ibi=com.ingka.ikea.app
+            |&ifl=https://order.ikea.com/at/de/purchases/ikea_ikea/?lid=hello
+            |&ofl=https://order.ikea.com/at/de/purchases/ikea_ikea/?lid=hello&imv=1.2.3&amv=1100
             |""".trimTestMargin(),
             """
-            |https://ingka.page.link/?link=https://order.ikea.com/at/history/%23/lookup?orderId=ikea123&lid=yeeeet
-            |&apn=com.ingka.ikea.app&afl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&ibi=com.ingka.ikea.app
-            |&ifl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet
-            |&ofl=https://order.ikea.com/at/de/purchases/ikea_sucks/?lid=yeeeet&imv=1.2.3&amv=1100
+            |https://ingka.page.link/?link=https://order.ikea.com/at/history/%23/lookup?orderId=ikea123&lid=hello
+            |&apn=com.ingka.ikea.app&afl=https://order.ikea.com/at/de/purchases/ikea_ikea/?lid=hello&ibi=com.ingka.ikea.app
+            |&ifl=https://order.ikea.com/at/de/purchases/ikea_ikea/?lid=hello
+            |&ofl=https://order.ikea.com/at/de/purchases/ikea_ikea/?lid=hello&imv=1.2.3&amv=1100
             |""".trimTestMargin(),
         )
         .row(
