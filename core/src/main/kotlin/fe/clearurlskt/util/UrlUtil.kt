@@ -1,8 +1,8 @@
 package fe.clearurlskt.util
 
-import fe.std.uri.Url
+import fe.std.uri.StdUrl
 
-public fun Url.toFragmentMap(): MutableMap<String, String?> {
+public fun StdUrl.toFragmentMap(): MutableMap<String, String?> {
     return fragment
         ?.split("&")
         ?.map { it.split("=") }

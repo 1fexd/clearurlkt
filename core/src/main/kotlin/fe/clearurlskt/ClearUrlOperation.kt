@@ -1,7 +1,7 @@
 package fe.clearurlskt
 
 import fe.std.result.Failure
-import fe.std.uri.Url
+import fe.std.uri.StdUrl
 
 public sealed interface ClearUrlOperation
 
@@ -34,4 +34,4 @@ public sealed class Modification(
 }
 
 public data class Exception(val provider: String, val url: String, val regex: Regex) : ClearUrlOperation
-public data class ParseFailure(val provider: String, val url: String, val parseResult: Failure<Url>) : ClearUrlOperation
+public data class ParseFailure(val provider: String, val url: String, val parseResult: Failure<StdUrl>) : ClearUrlOperation
